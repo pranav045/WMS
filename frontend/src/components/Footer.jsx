@@ -22,17 +22,17 @@ const Footer = () => {
         <div className="footer-section">
           <h3>Contact Info</h3>
           <p>📧 info@ecowaste.com</p>
-          <p>📞 +1 (555) 123-ECOW</p>
-          <p>📍 123 Green Street, Eco City</p>
+          <p>📞 +91 7078911359</p>
+          <p>📍 Jalandhar Punjab</p>
         </div>
         
         <div className="footer-section">
           <h3>Follow Us</h3>
           <div className="social-links">
-            <a href="#">Facebook</a>
-            <a href="#">Twitter</a>
-            <a href="#">Instagram</a>
-            <a href="#">LinkedIn</a>
+           <a href="https://facebook.com">Facebook</a><br/>
+<a href="https://twitter.com">Twitter</a><br/>
+<a href="https://instagram.com">Instagram</a><br/>
+<a href="https://linkedin.com">LinkedIn</a>
           </div>
         </div>
       </div>
