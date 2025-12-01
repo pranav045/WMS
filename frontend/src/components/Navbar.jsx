@@ -455,6 +455,17 @@ const Navbar = () => {
                       Learn
                     </Link>
                   </li>
+
+                  <li>
+                    <Link 
+                      to="/about" 
+                      onClick={closeMenu}
+                      className={location.pathname === '/about' ? 'active' : ''}
+                    >
+                      About
+                    </Link>
+                  </li>
+                  
                   <li>
                     <Link 
                       to="/contact" 
@@ -463,7 +474,8 @@ const Navbar = () => {
                     >
                       Contact
                     </Link>
-                  </li>
+                  </li> 
+                  
                 </>
               )}
             </ul>
