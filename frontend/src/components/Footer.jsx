@@ -1,5 +1,11 @@
 import React from 'react';
+<<<<<<< HEAD
 import { Link } from "react-router-dom";
+=======
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faFacebook, faTwitter, faInstagram, faLinkedin } from "@fortawesome/free-brands-svg-icons";
+
+>>>>>>> ae7a678ae623fc9f51aaa468bae5fe2a8a7a1fe4
 
 const Footer = () => {
   return (
@@ -32,13 +38,16 @@ const Footer = () => {
         <div className="footer-section">
           <h3>Follow Us</h3>
           <div className="social-links">
-           <a href="https://facebook.com">Facebook</a><br/>
-<a href="https://twitter.com">Twitter</a><br/>
-<a href="https://instagram.com">Instagram</a><br/>
-<a href="https://linkedin.com">LinkedIn</a>
+          
+
+<FontAwesomeIcon icon={faFacebook} /><a href="https://facebook.com"> Facebook</a><br/>
+
+<FontAwesomeIcon icon={faTwitter} /><a href="https://twitter.com"> Twitter</a><br/>
+<FontAwesomeIcon icon={faInstagram} /><a href="https://instagram.com"> Instagram</a><br/>
+<FontAwesomeIcon icon={faLinkedin} /><a href="https://linkedin.com"> LinkedIn</a>
           </div>
         </div>
-      </div>
+      </div> 
       
       <div className="footer-bottom">
         <p>&copy; 2024 EcoWaste. All rights reserved. | Building a Cleaner Tomorrow</p>
