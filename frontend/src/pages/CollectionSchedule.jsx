@@ -24,14 +24,14 @@ const getCountdown = (targetDateStr) => {
     text = `${minutes}m`;
   }
 
-  return { text, color: '#3b82f6' };
+  return { text, color: '#10B981' }; // Changed from #3b82f6 to #10B981
 };
 
 const getStatusColor = (status) => {
   switch (status) {
-    case 'completed': return '#3b82f6';
+    case 'completed': return '#10B981'; // Changed from #3b82f6
     case 'scheduled':
-    case 'confirmed': return '#3b82f6';
+    case 'confirmed': return '#10B981'; // Changed from #3b82f6
     case 'cancelled': return '#ef4444';
     case 'pending': return '#f59e0b';
     default: return '#6b7280';
@@ -555,7 +555,7 @@ const LocationCard = ({ point }) => (
           className="capacity-fill"
           style={{ 
             width: `${point.capacity}%`,
-            backgroundColor: point.capacity > 70 ? '#ef4444' : point.capacity > 50 ? '#f59e0b' : '#3b82f6'
+            backgroundColor: point.capacity > 70 ? '#ef4444' : point.capacity > 50 ? '#f59e0b' : '#10B981' // Changed from #3b82f6
           }} 
         />
       </div>
@@ -678,8 +678,9 @@ const ReportIssueModal = ({
 const GlobalStyles = () => (
   <style jsx global>{`
     :root {
-      --color-primary: #3b82f6;
-      --color-success: #3b82f6;
+      --color-primary: #10B981; /* Changed from #3b82f6 */
+      --color-primary-dark: #059669; /* Added for consistency with RecyclingTips */
+      --color-success: #10B981; /* Changed from #3b82f6 */
       --color-warning: #f59e0b;
       --color-danger: #ef4444;
       --color-neutral: #6b7280;
@@ -890,7 +891,7 @@ const GlobalStyles = () => (
 
     .progress-fill {
       height: 100%;
-      background: linear-gradient(to right, var(--color-success), var(--color-primary));
+      background: linear-gradient(to right, var(--color-success), var(--color-primary-dark)); /* Added gradient */
       transition: width 0.3s ease;
     }
 
@@ -1032,7 +1033,7 @@ const GlobalStyles = () => (
     }
 
     .action-button.primary:hover:not(:disabled) {
-      background: #1d4ed8;
+      background: var(--color-primary-dark); /* Changed from #1d4ed8 */
       box-shadow: var(--shadow-sm);
     }
 
@@ -1060,7 +1061,7 @@ const GlobalStyles = () => (
     }
 
     .action-button.export:hover:not(:disabled) {
-      background: #1d4ed8;
+      background: var(--color-primary-dark); /* Changed from #1d4ed8 */
     }
 
     /* Locations */
@@ -1284,7 +1285,7 @@ const GlobalStyles = () => (
     .form-input:focus {
       outline: none;
       border-color: var(--color-primary);
-      box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
+      box-shadow: 0 0 0 3px rgba(16, 185, 129, 0.1); /* Updated color */
     }
 
     .form-input:disabled {
@@ -1321,7 +1322,7 @@ const GlobalStyles = () => (
     }
 
     .btn.primary:hover:not(:disabled) {
-      background: #1d4ed8;
+      background: var(--color-primary-dark); /* Changed from #1d4ed8 */
     }
 
     .btn.neutral {
