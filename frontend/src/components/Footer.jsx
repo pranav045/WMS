@@ -54,25 +54,16 @@ const Footer = () => {
         <div className="footer-section">
           <h3>Follow Us</h3>
           <div className="social-links">
-
-            {/* <p><FontAwesomeIcon icon={faFacebook} /> <a href="https://facebook.com">Facebook</a></p>
-
-            <p><FontAwesomeIcon icon={faTwitter} /> <a href="https://twitter.com">Twitter</a></p>
-
-            <p><FontAwesomeIcon icon={faInstagram} /> <a href="https://instagram.com">Instagram</a></p>
-
-            <p><FontAwesomeIcon icon={faLinkedin} /> <a href="https://linkedin.com">LinkedIn</a></p> */}
-
-            <a href="https://facebook.com" className="hover:text-primary-color"><FontAwesomeIcon icon={faFacebook} /> Facebook</a><br/>
-            <a href="https://twitter.com" className="hover:text-primary-color"><FontAwesomeIcon icon={faTwitter} /> Twitter</a><br/>
-            <a href="https://instagram.com" className="hover:text-primary-color"><FontAwesomeIcon icon={faInstagram} /> Instagram</a><br/>
-            <a href="https://linkedin.com" className="hover:text-primary-color"><FontAwesomeIcon icon={faLinkedin} /> LinkedIn</a>
+           <FontAwesomeIcon icon={faFacebook} /> <a href="https://facebook.com" className="hover:text-primary-color"> Facebook</a><br/>
+            <FontAwesomeIcon icon={faTwitter} /><a href="https://twitter.com" className="hover:text-primary-color"> Twitter</a><br/>
+            <FontAwesomeIcon icon={faInstagram} /><a href="https://instagram.com" className="hover:text-primary-color"> Instagram</a><br/>
+            <FontAwesomeIcon icon={faLinkedin} /><a href="https://linkedin.com" className="hover:text-primary-color"> LinkedIn</a>
           </div>
         </div>
       </div>
 
       <div className="footer-bottom">
-        <p>&copy; 2024 EcoWaste. All rights reserved. | Building a Cleaner Tomorrow</p>
+        <p>&copy; 2025 EcoWaste. All rights reserved. | Building a Cleaner Tomorrow</p>
       </div>
     </footer>
   );
