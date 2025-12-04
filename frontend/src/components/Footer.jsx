@@ -5,6 +5,10 @@ import { Link } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faFacebook, faTwitter, faInstagram, faLinkedin } from "@fortawesome/free-brands-svg-icons";
 
+
+
+
+
 const Footer = () => {
   return (
     <footer className="footer">
@@ -28,6 +32,17 @@ const Footer = () => {
             <li><Link to="/education">Educational Resources</Link></li>
           </ul>
         </div>
+        
+        {/* <div className="footer-section">
+          <h3>Quick Links</h3>
+          <ul>
+            <li><Link to="/">Home</Link></li>
+            <li><Link to="/about">About Us</Link></li>
+            <li><Link to="/tracker">Waste Tracker</Link></li>
+            <li><Link to="/tips">Recycling Tips</Link></li>
+            <li><Link to="/education">Educational Resources</Link></li>
+          </ul>
+        </div> */}
 
         <div className="footer-section">
           <h3>Contact Info</h3>
@@ -40,14 +55,18 @@ const Footer = () => {
           <h3>Follow Us</h3>
           <div className="social-links">
 
-            <p><FontAwesomeIcon icon={faFacebook} /> <a href="https://facebook.com">Facebook</a></p>
+            {/* <p><FontAwesomeIcon icon={faFacebook} /> <a href="https://facebook.com">Facebook</a></p>
 
             <p><FontAwesomeIcon icon={faTwitter} /> <a href="https://twitter.com">Twitter</a></p>
 
             <p><FontAwesomeIcon icon={faInstagram} /> <a href="https://instagram.com">Instagram</a></p>
 
-            <p><FontAwesomeIcon icon={faLinkedin} /> <a href="https://linkedin.com">LinkedIn</a></p>
+            <p><FontAwesomeIcon icon={faLinkedin} /> <a href="https://linkedin.com">LinkedIn</a></p> */}
 
+            <a href="https://facebook.com" className="hover:text-primary-color"><FontAwesomeIcon icon={faFacebook} /> Facebook</a><br/>
+            <a href="https://twitter.com" className="hover:text-primary-color"><FontAwesomeIcon icon={faTwitter} /> Twitter</a><br/>
+            <a href="https://instagram.com" className="hover:text-primary-color"><FontAwesomeIcon icon={faInstagram} /> Instagram</a><br/>
+            <a href="https://linkedin.com" className="hover:text-primary-color"><FontAwesomeIcon icon={faLinkedin} /> LinkedIn</a>
           </div>
         </div>
       </div>

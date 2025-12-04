@@ -1,396 +1,322 @@
-import React from 'react';
-import { Link } from 'react-router-dom';
+import React from "react";
+import { Link } from "react-router-dom";
 
 const AboutUs = () => {
+  /* ------------------ ILLUSTRATOR SVG ICONS ------------------ */
+
+  const SVG = {
+    developer: (
+      <svg width="70" height="70" viewBox="0 0 64 64">
+        <circle cx="32" cy="32" r="30" fill="#e8f9f0" stroke="#27ae60" strokeWidth="3" />
+        <circle cx="32" cy="24" r="10" fill="#27ae60" />
+        <rect x="18" y="36" width="28" height="16" rx="6" fill="#27ae60" />
+      </svg>
+    ),
+    designer: (
+      <svg width="70" height="70" viewBox="0 0 64 64">
+        <circle cx="32" cy="32" r="30" fill="#eaf0ff" stroke="#667eea" strokeWidth="3" />
+        <path d="M20 42 L44 22" stroke="#667eea" strokeWidth="4" />
+        <circle cx="20" cy="42" r="6" fill="#667eea" />
+        <circle cx="44" cy="22" r="6" fill="#667eea" />
+      </svg>
+    ),
+    backend: (
+      <svg width="70" height="70" viewBox="0 0 64 64">
+        <rect x="8" y="12" width="48" height="40" rx="6" fill="#e8f9f0" stroke="#27ae60" strokeWidth="3" />
+        <rect x="16" y="20" width="32" height="10" fill="#27ae60" />
+        <rect x="16" y="34" width="20" height="6" fill="#27ae60" />
+      </svg>
+    ),
+
+    sustainability: (
+      <svg width="60" height="60" viewBox="0 0 64 64">
+        <path d="M32 50 C10 40 14 16 32 12 C50 16 54 40 32 50Z" fill="#27ae60" />
+        <rect x="28" y="50" width="8" height="12" fill="#145a32" />
+      </svg>
+    ),
+
+    community: (
+      <svg width="60" height="60" viewBox="0 0 64 64">
+        <circle cx="20" cy="24" r="10" fill="#27ae60" />
+        <circle cx="44" cy="24" r="10" fill="#27ae60" />
+        <rect x="14" y="34" width="36" height="16" rx="8" fill="#145a32" />
+      </svg>
+    ),
+
+    innovation: (
+      <svg width="60" height="60" viewBox="0 0 64 64">
+        <circle cx="32" cy="24" r="12" fill="#27ae60" />
+        <rect x="26" y="36" width="12" height="14" fill="#145a32" />
+      </svg>
+    ),
+
+    access: (
+      <svg width="60" height="60" viewBox="0 0 64 64">
+        <rect x="14" y="24" width="36" height="26" rx="4" fill="#27ae60" />
+        <circle cx="26" cy="37" r="5" fill="white" />
+      </svg>
+    ),
+
+    transparency: (
+      <svg width="60" height="60" viewBox="0 0 64 64">
+        <rect x="10" y="18" width="44" height="28" stroke="#27ae60" strokeWidth="3" fill="none" />
+        <rect x="18" y="28" width="10" height="12" fill="#27ae60" />
+        <rect x="32" y="32" width="10" height="8" fill="#27ae60" />
+      </svg>
+    ),
+
+    global: (
+      <svg width="60" height="60" viewBox="0 0 64 64">
+        <circle cx="32" cy="32" r="26" stroke="#27ae60" strokeWidth="3" fill="#e8f9f0" />
+        <path d="M20 32 H44 M32 20 V44" stroke="#27ae60" strokeWidth="3" />
+      </svg>
+    ),
+
+    recycling: (
+      <svg width="70" height="70" viewBox="0 0 64 64">
+        <path d="M22 14 L10 32 L22 32 Z" fill="#27ae60" />
+        <path d="M42 14 L54 32 L42 32 Z" fill="#27ae60" />
+        <path d="M16 40 L32 52 L48 40 L32 28 Z" fill="#145a32" />
+      </svg>
+    ),
+
+    react: (
+      <svg width="60" height="60" viewBox="0 0 64 64">
+        <circle cx="32" cy="32" r="6" fill="#27ae60" />
+        <ellipse cx="32" cy="32" rx="22" ry="10" stroke="#27ae60" strokeWidth="3" fill="none" />
+        <ellipse cx="32" cy="32" rx="22" ry="10" stroke="#27ae60" strokeWidth="3" fill="none" transform="rotate(60 32 32)" />
+        <ellipse cx="32" cy="32" rx="22" ry="10" stroke="#27ae60" strokeWidth="3" fill="none" transform="rotate(120 32 32)" />
+      </svg>
+    ),
+
+    node: (
+      <svg width="60" height="60" viewBox="0 0 64 64">
+        <polygon points="32,6 54,18 54,46 32,58 10,46 10,18" fill="#27ae60" />
+      </svg>
+    ),
+
+    mongodb: (
+      <svg width="60" height="60" viewBox="0 0 64 64">
+        <path d="M32 6 C46 20 46 40 32 58 C18 40 18 20 32 6Z" fill="#27ae60" />
+      </svg>
+    ),
+
+    chart: (
+      <svg width="60" height="60" viewBox="0 0 64 64">
+        <rect x="12" y="32" width="8" height="20" fill="#27ae60" />
+        <rect x="28" y="24" width="8" height="28" fill="#27ae60" />
+        <rect x="44" y="16" width="8" height="36" fill="#27ae60" />
+      </svg>
+    ),
+
+    express: (
+      <svg width="60" height="60" viewBox="0 0 64 64">
+        <line x1="10" y1="32" x2="54" y2="32" stroke="#27ae60" strokeWidth="6" />
+      </svg>
+    ),
+  };
+
   const developers = [
     {
       id: 1,
-      name: 'Alex Morgan',
-      role: 'Full Stack Developer',
-      image: '👨‍💻',
-      bio: 'Passionate about sustainable technology and creating solutions that bridge the gap between tech and environmental conservation.',
-      skills: ['React', 'Node.js', 'MongoDB', 'UI/UX'],
-      github: 'https://github.com/alex-morgan',
-      linkedin: 'https://linkedin.com/in/alex-morgan'
+      name: "Alex Morgan",
+      role: "Full Stack Developer",
+      image: SVG.developer,
+      bio: "Passionate about sustainable technology.",
+      skills: ["React", "Node.js", "MongoDB", "UI/UX"],
+      github: "https://github.com/alex-morgan",
+      linkedin: "https://linkedin.com/in/alex-morgan",
     },
     {
       id: 2,
-      name: 'Sarah Chen',
-      role: 'UI/UX Designer & Frontend Lead',
-      image: '👩‍🎨',
-      bio: 'Focused on creating intuitive and beautiful interfaces that make sustainable living accessible to everyone.',
-      skills: ['React', 'Figma', 'CSS3', 'Design Systems'],
-      github: 'https://github.com/sarah-chen',
-      linkedin: 'https://linkedin.com/in/sarah-chen'
+      name: "Sarah Chen",
+      role: "UI/UX Designer & Frontend Lead",
+      image: SVG.designer,
+      bio: "Focused on intuitive and beautiful interfaces.",
+      skills: ["React", "Figma", "CSS3", "Design Systems"],
+      github: "https://github.com/sarah-chen",
+      linkedin: "https://linkedin.com/in/sarah-chen",
     },
     {
       id: 3,
-      name: 'David Okoro',
-      role: 'Backend Engineer',
-      image: '👨‍🔧',
-      bio: 'Specializes in scalable server architecture and database optimization for environmental applications.',
-      skills: ['Node.js', 'Express', 'MongoDB', 'AWS'],
-      github: 'https://github.com/david-okoro',
-      linkedin: 'https://linkedin.com/in/david-okoro'
+      name: "David Okoro",
+      role: "Backend Engineer",
+      image: SVG.backend,
+      bio: "Specializes in scalable server architecture.",
+      skills: ["Node.js", "Express", "MongoDB", "AWS"],
+      github: "https://github.com/david-okoro",
+      linkedin: "https://linkedin.com/in/david-okoro",
     },
-    {
-      id: 4,
-      name: 'Maria Rodriguez',
-      role: 'Environmental Analyst',
-      image: '👩‍🔬',
-      bio: 'Ensures all environmental impact calculations and data are scientifically accurate and meaningful.',
-      skills: ['Data Analysis', 'Sustainability', 'Research', 'Reporting'],
-      github: 'https://github.com/maria-rodriguez',
-      linkedin: 'https://linkedin.com/in/maria-rodriguez'
-    }
-  ];
-
-  const milestones = [
-    { year: '2023', title: 'Project Inception', description: 'Conceptualized the idea of digital waste management' },
-    { year: '2024 Q1', title: 'First Prototype', description: 'Developed the initial version of EcoWaste' },
-    { year: '2024 Q2', title: 'Beta Launch', description: 'Released to first 100 users for testing' },
-    { year: '2024 Q3', title: 'Community Growth', description: 'Reached 10,000+ active users' },
-    { year: '2024 Q4', title: 'Features Expansion', description: 'Added advanced analytics and community features' },
   ];
 
   const values = [
-    {
-      icon: '🌱',
-      title: 'Sustainability First',
-      description: 'Every feature is designed with environmental impact in mind'
-    },
-    {
-      icon: '🤝',
-      title: 'Community Driven',
-      description: 'Built by and for the eco-conscious community'
-    },
-    {
-      icon: '💡',
-      title: 'Innovation',
-      description: 'Leveraging technology for real environmental solutions'
-    },
-    {
-      icon: '🔓',
-      title: 'Accessibility',
-      description: 'Making sustainable living easy for everyone'
-    },
-    {
-      icon: '📊',
-      title: 'Transparency',
-      description: 'Clear impact tracking and honest reporting'
-    },
-    {
-      icon: '🌍',
-      title: 'Global Impact',
-      description: 'Thinking globally while acting locally'
-    }
+    { icon: SVG.sustainability, title: "Sustainability First", description: "Designed with environmental impact in mind" },
+    { icon: SVG.community, title: "Community Driven", description: "Built for the eco-conscious community" },
+    { icon: SVG.innovation, title: "Innovation", description: "Technology solving real environmental issues" },
+    { icon: SVG.access, title: "Accessibility", description: "Making sustainable living easy" },
+    { icon: SVG.transparency, title: "Transparency", description: "Clear impact tracking" },
+    { icon: SVG.global, title: "Global Impact", description: "Act locally, think globally" },
   ];
 
   return (
-    <div style={{ padding: '2rem', maxWidth: '1200px', margin: '0 auto' }}>
-      {/* Hero Section */}
-      <section style={{ textAlign: 'center', marginBottom: '4rem' }}>
-        <h1 style={{ fontSize: '3.5rem', marginBottom: '1rem', color: 'var(--primary-color)' }}>
-          About EcoWaste
-        </h1>
-        <p style={{ fontSize: '1.2rem', color: 'var(--text-light)', maxWidth: '800px', margin: '0 auto 2rem' }}>
-          We're on a mission to revolutionize waste management through technology, education, and community engagement.
-        </p>
+    <div style={{ padding: "2rem", maxWidth: "1200px", margin: "0 auto" }}>
+      <style>{`
+        .journey-grid {
+          display: grid;
+          grid-template-columns: 1fr 1fr;
+          gap: 3rem;
+          align-items: center;
+        }
+        @media(max-width:768px){
+          .journey-grid { grid-template-columns:1fr; }
+        }
+        .team-grid {
+          display:flex;
+          justify-content:center;
+          flex-wrap:wrap;
+          gap:2rem;
+        }
+        .team-card{
+          width:300px;
+          text-align:center;
+        }
+        .skill-tag{
+          padding:0.3rem 0.8rem;
+          background:#e8f9f0;
+          border-radius:20px;
+          margin:2px;
+          font-size:0.8rem;
+        }
+      `}</style>
+
+      {/* PAGE TITLE */}
+      <section style={{ textAlign: "center", marginBottom: "4rem" }}>
+        <h1 style={{ fontSize: "3.5rem", color: "var(--primary-color)" }}>About EcoWaste</h1>
       </section>
 
-      {/* Our Story Section */}
-      <section className="card" style={{ marginBottom: '3rem' }}>
-        <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '3rem', alignItems: 'center' }}>
+      {/* OUR STORY */}
+      <section className="card" style={{ marginBottom: "3rem" }}>
+        <div className="journey-grid">
+          <div style={{ textAlign: "center" }}>{SVG.recycling}</div>
           <div>
-            <h2 style={{ marginBottom: '1rem' }}>Our Story</h2>
-            <p style={{ lineHeight: '1.8', color: 'var(--text-light)', marginBottom: '1.5rem' }}>
-              EcoWaste was born from a simple observation: while technology has transformed nearly every aspect of our lives, 
-              waste management remained largely unchanged. We saw an opportunity to apply modern technology to one of 
-              humanity's oldest problems.
+            <h2>Our Story</h2>
+            <p style={{ color: "var(--text-light)", textAlign: "left" }}>
+              We wanted to change that. Not with lectures… but with technology that makes sustainability easy,
+              understandable, and rewarding. What started as a passion project between a few environmentally-driven
+              developers has now evolved into a platform helping thousands reduce waste, track impact, and build
+              eco-friendly habits.
             </p>
-            <p style={{ lineHeight: '1.8', color: 'var(--text-light)', marginBottom: '1.5rem' }}>
-              What started as a small project among environmentally-conscious developers has grown into a platform 
-              serving thousands of users worldwide. We believe that by making waste management smart, accessible, 
-              and engaging, we can create meaningful environmental change.
-            </p>
-            <Link to="/contact" className="cta-button" style={{ display: 'inline-block' }}>
-              Join Our Mission
-            </Link>
-          </div>
-          <div style={{ 
-            background: 'linear-gradient(135deg, #2ecc71, #27ae60)', 
-            padding: '2rem', 
-            borderRadius: '15px',
-            color: 'white',
-            textAlign: 'center'
-          }}>
-            <div style={{ fontSize: '4rem', marginBottom: '1rem' }}>♻️</div>
-            <h3 style={{ color: 'white' }}>120+ Tons</h3>
-            <p>Waste diverted from landfills</p>
-            <div style={{ marginTop: '2rem' }}>
-              <h3 style={{ color: 'white' }}>50,000+</h3>
-              <p>Active Users Worldwide</p>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* Mission & Vision */}
-      <section style={{ marginBottom: '3rem' }}>
-        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(350px, 1fr))', gap: '2rem' }}>
-          <div className="card">
-            <div style={{ fontSize: '3rem', marginBottom: '1rem' }}>🎯</div>
-            <h3>Our Mission</h3>
-            <p style={{ color: 'var(--text-light)', lineHeight: '1.6' }}>
-              To empower individuals and communities with intelligent tools and knowledge that make sustainable 
-              waste management simple, effective, and rewarding. We aim to reduce global waste through technology 
-              that inspires action and fosters environmental responsibility.
-            </p>
-          </div>
-          
-          <div className="card">
-            <div style={{ fontSize: '3rem', marginBottom: '1rem' }}>🔭</div>
-            <h3>Our Vision</h3>
-            <p style={{ color: 'var(--text-light)', lineHeight: '1.6' }}>
-              A world where waste is viewed not as garbage, but as a resource. We envision communities where 
-              zero-waste living is the norm, recycling is effortless, and every individual understands their 
-              impact on our planet.
+            <strong style={{ color: "var(--text-light)", textAlign: "left" }}>
+              Our mission is simple: 
+            </strong>
+            <p style={{ color: "var(--text-light)", textAlign: "left" }}>
+              "Turn waste management into something people actually want to participate in."
+              Through powerful analytics, gamification, and intuitive UI, EcoWaste empowers users to make small
+              choices that create big change.
             </p>
           </div>
         </div>
       </section>
 
-      {/* Core Values */}
-      <section style={{ marginBottom: '4rem' }}>
-        <h2 style={{ textAlign: 'center', marginBottom: '2rem' }}>Our Core Values</h2>
-        <div className="card-grid">
-          {values.map((value, index) => (
-            <div key={index} className="card" style={{ textAlign: 'center' }}>
-              <div style={{ fontSize: '2.5rem', marginBottom: '1rem' }}>{value.icon}</div>
-              <h3>{value.title}</h3>
-              <p style={{ color: 'var(--text-light)' }}>{value.description}</p>
+      {/* VALUES */}
+      <section style={{ marginBottom: "4rem" }}>
+        <h2 style={{ textAlign: "center" }}>Our Core Values</h2>
+        <div className="team-grid">
+          {values.map((v, i) => (
+            <div key={i} className="card" style={{ width: "250px", textAlign: "center" }}>
+              <div>{v.icon}</div>
+              <h3>{v.title}</h3>
+              <p style={{ color: "var(--text-light)" }}>{v.description}</p>
             </div>
           ))}
         </div>
       </section>
 
-      {/* Meet the Team */}
-      <section style={{ marginBottom: '4rem' }}>
-        <h2 style={{ textAlign: 'center', marginBottom: '2rem' }}>Meet the Team</h2>
-        <div className="card-grid">
-          {developers.map(dev => (
-            <div key={dev.id} className="card">
-              <div style={{ 
-                fontSize: '4rem', 
-                textAlign: 'center',
-                marginBottom: '1rem'
-              }}>
-                {dev.image}
-              </div>
-              <h3 style={{ textAlign: 'center', marginBottom: '0.5rem' }}>{dev.name}</h3>
-              <p style={{ 
-                textAlign: 'center', 
-                color: 'var(--primary-color)', 
-                fontWeight: '500',
-                marginBottom: '1rem'
-              }}>
-                {dev.role}
-              </p>
-              <p style={{ color: 'var(--text-light)', marginBottom: '1.5rem' }}>
-                {dev.bio}
-              </p>
-              
-              <div style={{ marginBottom: '1.5rem' }}>
-                <div style={{ display: 'flex', flexWrap: 'wrap', gap: '0.5rem', justifyContent: 'center' }}>
-                  {dev.skills.map((skill, index) => (
-                    <span
-                      key={index}
-                      style={{
-                        padding: '0.25rem 0.75rem',
-                        background: 'var(--light-color)',
-                        borderRadius: '20px',
-                        fontSize: '0.8rem',
-                        color: 'var(--text-dark)'
-                      }}
-                    >
-                      {skill}
-                    </span>
-                  ))}
-                </div>
-              </div>
-              
-              <div style={{ display: 'flex', justifyContent: 'center', gap: '1rem' }}>
-                <a 
-                  href={dev.github} 
-                  target="_blank" 
-                  rel="noopener noreferrer"
-                  style={{
-                    padding: '0.5rem 1rem',
-                    background: '#333',
-                    color: 'white',
-                    borderRadius: '8px',
-                    textDecoration: 'none',
-                    display: 'flex',
-                    alignItems: 'center',
-                    gap: '0.5rem'
-                  }}
-                >
-                  <span>GitHub</span>
-                </a>
-                <a 
-                  href={dev.linkedin} 
-                  target="_blank" 
-                  rel="noopener noreferrer"
-                  style={{
-                    padding: '0.5rem 1rem',
-                    background: '#0077b5',
-                    color: 'white',
-                    borderRadius: '8px',
-                    textDecoration: 'none',
-                    display: 'flex',
-                    alignItems: 'center',
-                    gap: '0.5rem'
-                  }}
-                >
-                  <span>LinkedIn</span>
-                </a>
+      {/* TEAM */}
+      <section style={{ marginBottom: "4rem" }}>
+        <h2 style={{ textAlign: "center" }}>Meet the Team</h2>
+        <div className="team-grid">
+          {developers.map((dev) => (
+            <div key={dev.id} className="card team-card">
+              <div>{dev.image}</div>
+              <h3>{dev.name}</h3>
+              <p style={{ color: "var(--primary-color)" }}>{dev.role}</p>
+              <p style={{ color: "var(--text-light)" }}>{dev.bio}</p>
+              <div>
+                {dev.skills.map((s, i) => (
+                  <span className="skill-tag" key={i}>{s}</span>
+                ))}
               </div>
             </div>
           ))}
         </div>
       </section>
 
-      {/* Journey Timeline */}
-      <section style={{ marginBottom: '4rem' }}>
-        <h2 style={{ textAlign: 'center', marginBottom: '2rem' }}>Our Journey</h2>
-        <div className="card" style={{ position: 'relative' }}>
-          <div style={{ 
-            position: 'absolute', 
-            left: '50%', 
-            top: '2rem', 
-            bottom: '2rem', 
-            width: '3px', 
-            background: 'var(--primary-color)',
-            transform: 'translateX(-50%)',
-            zIndex: 1
-          }}></div>
-          
-          {milestones.map((milestone, index) => (
-            <div
-              key={index}
-              style={{
-                display: 'flex',
-                alignItems: 'center',
-                marginBottom: index < milestones.length - 1 ? '3rem' : '0',
-                position: 'relative',
-                zIndex: 2
-              }}
-            >
-              <div style={{ 
-                flex: '0 0 50%', 
-                textAlign: index % 2 === 0 ? 'right' : 'left',
-                padding: index % 2 === 0 ? '0 3rem 0 0' : '0 0 0 3rem'
-              }}>
-                <div style={{ 
-                  display: 'inline-block',
-                  background: 'white',
-                  padding: '1.5rem',
-                  borderRadius: '10px',
-                  boxShadow: 'var(--shadow)',
-                  maxWidth: '400px'
-                }}>
-                  <h3 style={{ color: 'var(--primary-color)', marginBottom: '0.5rem' }}>
-                    {milestone.year}
-                  </h3>
-                  <h4 style={{ marginBottom: '0.5rem' }}>{milestone.title}</h4>
-                  <p style={{ color: 'var(--text-light)', margin: 0 }}>
-                    {milestone.description}
-                  </p>
-                </div>
-              </div>
-              
-              <div style={{
-                position: 'absolute',
-                left: '50%',
-                transform: 'translateX(-50%)',
-                width: '20px',
-                height: '20px',
-                borderRadius: '50%',
-                background: 'var(--primary-color)',
-                border: '4px solid white',
-                boxShadow: '0 0 0 3px var(--primary-color)'
-              }}></div>
-              
-              <div style={{ flex: '0 0 50%' }}></div>
-            </div>
-          ))}
-        </div>
-      </section>
+      {/* TECH STACK */}
+      <section style={{ marginBottom: "4rem" }}>
+      <h2 style={{ textAlign: "center" }}>Technology We Use</h2>
 
-      {/* Tech Stack */}
-      <section style={{ marginBottom: '4rem' }}>
-        <h2 style={{ textAlign: 'center', marginBottom: '2rem' }}>Technology We Use</h2>
+      <div className="team-grid">
+
+        {/* React */}
         <div className="card">
-          <div style={{ 
-            display: 'grid', 
-            gridTemplateColumns: 'repeat(auto-fit, minmax(150px, 1fr))', 
-            gap: '2rem',
-            textAlign: 'center'
-          }}>
-            <div>
-              <div style={{ fontSize: '3rem', marginBottom: '1rem' }}>⚛️</div>
-              <h4>React</h4>
-              <p style={{ color: 'var(--text-light)', fontSize: '0.9rem' }}>Frontend Framework</p>
-            </div>
-            <div>
-              <div style={{ fontSize: '3rem', marginBottom: '1rem' }}>🚀</div>
-              <h4>Node.js</h4>
-              <p style={{ color: 'var(--text-light)', fontSize: '0.9rem' }}>Backend Runtime</p>
-            </div>
-            <div>
-              <div style={{ fontSize: '3rem', marginBottom: '1rem' }}>🗄️</div>
-              <h4>MongoDB</h4>
-              <p style={{ color: 'var(--text-light)', fontSize: '0.9rem' }}>Database</p>
-            </div>
-            <div>
-              <div style={{ fontSize: '3rem', marginBottom: '1rem' }}>📊</div>
-              <h4>Chart.js</h4>
-              <p style={{ color: 'var(--text-light)', fontSize: '0.9rem' }}>Data Visualization</p>
-            </div>
-            <div>
-              <div style={{ fontSize: '3rem', marginBottom: '1rem' }}>⚡</div>
-              <h4>Express</h4>
-              <p style={{ color: 'var(--text-light)', fontSize: '0.9rem' }}>Web Framework</p>
-            </div>
-          </div>
+          <img
+            src="https://upload.wikimedia.org/wikipedia/commons/a/a7/React-icon.svg"
+            width="60"
+            height="60"
+            alt="React"
+          />
+          <p>React</p>
         </div>
-      </section>
 
-      {/* Join Us CTA */}
-      <section className="card" style={{ 
-        textAlign: 'center',
-        background: 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)',
-        color: 'white'
-      }}>
-        <h2 style={{ color: 'white', marginBottom: '1rem' }}>Want to Join Our Mission?</h2>
-        <p style={{ marginBottom: '2rem', opacity: 0.9 }}>
-          We're always looking for passionate developers, designers, and environmental enthusiasts to help us grow.
-        </p>
-        <div style={{ display: 'flex', gap: '1rem', justifyContent: 'center', flexWrap: 'wrap' }}>
-          <Link to="/contact" className="cta-button" style={{ background: 'white', color: '#667eea' }}>
-            Contact Us
-          </Link>
-          <a 
-            href="https://github.com/yourusername/ecowaste" 
-            target="_blank" 
-            rel="noopener noreferrer"
-            className="cta-button"
-            style={{ background: '#333', color: 'white' }}
-          >
-            View on GitHub
-          </a>
+        {/* Node.js */}
+        <div className="card">
+          <img
+            src="https://upload.wikimedia.org/wikipedia/commons/d/d9/Node.js_logo.svg"
+            width="60"
+            height="60"
+            alt="Node.js"
+          />
+          <p>Node.js</p>
         </div>
-      </section>
+
+        {/* MongoDB (WORKING official CDN) */}
+        <div className="card">
+          <img
+            src="https://webimages.mongodb.com/_com_assets/cms/mongodb_logo1-76twgcu2dm.png"
+            width="60"
+            height="60"
+            alt="MongoDB"
+            style={{ objectFit: "contain" }}
+          />
+          <p>MongoDB</p>
+        </div>
+
+        {/* Chart.js */}
+        <div className="card">
+          <img
+            src="https://www.chartjs.org/media/logo-title.svg"
+            width="60"
+            height="60"
+            alt="Chart.js"
+          />
+          <p>Chart.js</p>
+        </div>
+
+        {/* Express */}
+        <div className="card">
+          <img
+            src="https://upload.wikimedia.org/wikipedia/commons/6/64/Expressjs.png"
+            width="60"
+            height="60"
+            alt="Express"
+            style={{ objectFit: "contain" }}
+          />
+          <p>Express</p>
+        </div>
+
+      </div>
+    </section>
     </div>
   );
 };

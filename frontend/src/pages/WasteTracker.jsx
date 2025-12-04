@@ -687,9 +687,27 @@ const WasteTracker = () => {
   return (
     <div className={classes.container}>
       {/* Animated Header */}
-      <div className={classes.animatedHeader}>
-        <p>Track your waste disposal and monitor your environmental impact</p>
-      </div>
+      {/* Animated Header – BIGGER & BOLDER */}
+<div className={classes.animatedHeader}>
+  <h1 style={{
+    fontSize: '2rem',           // ← this makes it HUGE
+    fontWeight: 800,
+    margin: '0 0 1rem 0',
+    background: 'linear-gradient(90deg, var(--primary-color), var(--primary-dark))',
+    WebkitBackgroundClip: 'text',
+    WebkitTextFillColor: 'transparent',
+    backgroundClip: 'text',
+    lineHeight: '1.2',
+    letterSpacing: '-0.5px',
+  }}>
+    Track your waste disposal
+   
+    and monitor your environmental impact
+  </h1>
+  <p style={{ fontSize: '1.25rem', opacity: 0.9 }}>
+    Every kilogram counts – start making a difference today!
+  </p>
+</div>
 
       {/* Messages */}
       {message.text && (

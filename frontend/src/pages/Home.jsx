@@ -1,9 +1,59 @@
-import React from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
 
 const Home = () => {
   const { user } = useAuth();
+  
+  // State to trigger count-up when section is visible
+  const [isVisible, setIsVisible] = useState(false);
+  const statsRef = useRef(null);
+
+  // Simple intersection observer to detect when stats enter viewport
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          setIsVisible(true);
+          observer.unobserve(entry.target);
+        }
+      },
+      { threshold: 0.3 }
+    );
+
+    if (statsRef.current) {
+      observer.observe(statsRef.current);
+    }
+
+    return () => observer.disconnect();
+  }, []);
+
+  // Animated counter component
+  const AnimatedCounter = ({ end, suffix = '', duration = 2.5 }) => {
+    const [count, setCount] = useState(0);
+
+    useEffect(() => {
+      if (!isVisible) return;
+
+      let startTime;
+      const animate = (timestamp) => {
+        if (!startTime) startTime = timestamp;
+        const progress = timestamp - startTime;
+        const percentage = Math.min(progress / (duration * 1000), 1);
+        setCount(Math.floor(end * percentage));
+
+        if (percentage < 1) {
+          requestAnimationFrame(animate);
+        } else {
+          setCount(end);
+        }
+      };
+
+      requestAnimationFrame(animate);
+    }, [isVisible, end, duration]);
+
+    return <>{count}{suffix}</>;
+  };
 
   return (
     <div className="w-full">
@@ -28,48 +78,56 @@ const Home = () => {
       <section>
         <div className="card-grid">
           <div className="card">
-            <div className="card-icon">📊</div>
+            <div className="card-icon">Chart</div>
             <h3>Waste Tracking</h3>
             <p>Monitor your waste production patterns and get insights to reduce your environmental footprint.</p>
           </div>
           
           <div className="card">
-            <div className="card-icon">♻️</div>
+            <div className="card-icon">Recycle</div>
             <h3>Smart Recycling</h3>
             <p>Learn proper recycling techniques and find the best ways to dispose of different materials.</p>
           </div>
           
           <div className="card">
-            <div className="card-icon">📅</div>
+            <div className="card-icon">Calendar</div>
             <h3>Collection Schedule</h3>
             <p>Never miss collection days with smart notifications and optimized pickup schedules.</p>
           </div>
           
           <div className="card">
-            <div className="card-icon">🌍</div>
+            <div className="card-icon">Globe</div>
             <h3>Community Impact</h3>
             <p>Join a growing community committed to sustainable waste management practices.</p>
           </div>
         </div>
       </section>
 
-      {/* Stats Section */}
-      <section className="stats-section">
+      {/* Stats Section - NOW DYNAMIC */}
+      <section className="stats-section" ref={statsRef}>
         <div className="stats-grid">
           <div className="stat-item">
-            <h3>50K+</h3>
+            <h3>
+              {isVisible ? <AnimatedCounter end={50000} suffix="K+" /> : '0K+'}
+            </h3>
             <p>Active Users</p>
           </div>
           <div className="stat-item">
-            <h3>120T</h3>
+            <h3>
+              {isVisible ? <AnimatedCounter end={120} suffix="T" /> : '0T'}
+            </h3>
             <p>Waste Recycled</p>
           </div>
           <div className="stat-item">
-            <h3>45%</h3>
+            <h3>
+              {isVisible ? <AnimatedCounter end={45} suffix="%" /> : '0%'}
+            </h3>
             <p>Reduction in Landfill</p>
           </div>
           <div className="stat-item">
-            <h3>200+</h3>
+            <h3>
+              {isVisible ? <AnimatedCounter end={200} suffix="+" /> : '0+'}
+            </h3>
             <p>Communities</p>
           </div>
         </div>
