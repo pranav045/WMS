@@ -52,9 +52,8 @@ const EducationalResources = () => {
     {
       id: 5,
       title: "Zero Waste Lifestyle",
-      type: "Video Course",
       description: "Practical tips and strategies for adopting a zero-waste lifestyle.",
-      duration: "2 hours",
+      duration: "15 mins",
       level: "Intermediate",
       icon: "Lightning",
       link: "https://onetreeplanted.org/blogs/stories/how-to-reduce-waste?srsltid=AfmBOorq7P75koU-9EjZiaEYuwWALXmNYN5u502t5vzX2Qt06TuNMJY0",
