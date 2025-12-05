@@ -15,16 +15,36 @@ const Contact = () => {
     });
   };
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    alert("Thank you for your message! We will get back to you soon.");
-    setFormData({
-      name: "",
-      email: "",
-      subject: "",
-      message: "",
+const handleSubmit = async (e) => {
+  e.preventDefault();
+
+  try {
+    const response = await fetch('http://localhost:5000/api/contact', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(formData),
     });
-  };
+
+    const data = await response.json();
+
+    if (data.success) {
+      alert(data.message || "Thank you! We'll get back to you soon.");
+      setFormData({
+        name: "",
+        email: "",
+        subject: "",
+        message: "",
+      });
+    } else {
+      alert(data.message || "Something went wrong. Please try again.");
+    }
+  } catch (error) {
+    console.error("Error sending message:", error);
+    alert("Failed to send message. Please check your connection.");
+  }
+};
 
   return (
     <>
@@ -440,7 +460,7 @@ const Contact = () => {
                   <div className="info-icon">📞</div>
                   <div className="info-content">
                     <h4>Phone</h4>
-                    <p>+1 (555) 123-ECOW<br/>+1 (555) 123-HELP</p>
+                    <p>+91 0000000001 ECOW<br/>+91 0000000002-HELP</p>
                   </div>
                 </div>
 
@@ -448,7 +468,7 @@ const Contact = () => {
                   <div className="info-icon">🏢</div>
                   <div className="info-content">
                     <h4>Office</h4>
-                    <p>123 Green Street<br/>Eco City, EC 12345</p>
+                    <p>123 Jalandhar<br/>Eco City, EC 12345</p>
                   </div>
                 </div>
 
