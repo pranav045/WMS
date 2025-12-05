@@ -4,7 +4,7 @@ const EducationalResources = () => {
     {
       id: 1,
       title: "The Complete Guide to Recycling Guide",
-      type: "PDF Guide",
+      type: "Guide",
       description: "Comprehensive guide covering all aspects of recycling and waste management.",
       duration: "15 min read",
       level: "Beginner",
@@ -53,6 +53,7 @@ const EducationalResources = () => {
       id: 5,
       title: "Zero Waste Lifestyle",
       description: "Practical tips and strategies for adopting a zero-waste lifestyle.",
+      type:"Tutorial",
       duration: "15 mins",
       level: "Intermediate",
       icon: "Lightning",
