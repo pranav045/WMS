@@ -1,10 +1,10 @@
-import React, { useEffect, useRef, useState } from 'react';
-import { Link } from 'react-router-dom';
-import { useAuth } from '../context/AuthContext';
+import React, { useEffect, useRef, useState } from "react";
+import { Link } from "react-router-dom";
+import { useAuth } from "../context/AuthContext";
 
 const Home = () => {
   const { user } = useAuth();
-  
+
   // State to trigger count-up when section is visible
   const [isVisible, setIsVisible] = useState(false);
   const statsRef = useRef(null);
@@ -29,7 +29,7 @@ const Home = () => {
   }, []);
 
   // Animated counter component
-  const AnimatedCounter = ({ end, suffix = '', duration = 2.5 }) => {
+  const AnimatedCounter = ({ end, suffix = "", duration = 2.5 }) => {
     const [count, setCount] = useState(0);
 
     useEffect(() => {
@@ -52,7 +52,12 @@ const Home = () => {
       requestAnimationFrame(animate);
     }, [isVisible, end, duration]);
 
-    return <>{count}{suffix}</>;
+    return (
+      <>
+        {count}
+        {suffix}
+      </>
+    );
   };
 
   return (
@@ -61,13 +66,21 @@ const Home = () => {
       <section className="hero">
         <div className="hero-content">
           <h1>Smart Waste Management Solutions</h1>
-          <p>Join thousands of eco-conscious individuals and communities in transforming waste management through technology, education, and sustainable practices.</p>
+          <p>
+            Join thousands of eco-conscious individuals and communities in
+            transforming waste management through technology, education, and
+            sustainable practices.
+          </p>
           {user ? (
             <Link to="/dashboard" className="btn btn-primary">
               Go to Dashboard
             </Link>
           ) : (
-            <Link to="/register" className="btn btn-primary">
+            <Link to="/register" className="btn btn-primary" 
+            onMouseEnter={(e) =>
+              (e.currentTarget.style.boxShadow = "0 0 15px white")
+            }
+            onMouseLeave={(e) => (e.currentTarget.style.boxShadow = "none")}>
               Start Your Eco Journey
             </Link>
           )}
@@ -77,28 +90,92 @@ const Home = () => {
       {/* Features Section */}
       <section>
         <div className="card-grid">
-          <div className="card">
-            <div className="card-icon">Chart</div>
+          <div
+            className="card"
+            onMouseEnter={(e) =>
+              (e.currentTarget.style.boxShadow = "0 0 15px green")
+            }
+            onMouseLeave={(e) => (e.currentTarget.style.boxShadow = "none")}
+          >
+            <div className="card-icon">
+              <span
+                className="material-symbols-outlined"
+                style={{ fontSize: "60px" }}
+              >
+                bar_chart
+              </span>
+            </div>
             <h3>Waste Tracking</h3>
-            <p>Monitor your waste production patterns and get insights to reduce your environmental footprint.</p>
+            <p>
+              Monitor your waste production patterns and get insights to reduce
+              your environmental footprint.
+            </p>
           </div>
-          
-          <div className="card">
-            <div className="card-icon">Recycle</div>
+
+          <div
+            className="card"
+            onMouseEnter={(e) =>
+              (e.currentTarget.style.boxShadow = "0 0 15px green")
+            }
+            onMouseLeave={(e) => (e.currentTarget.style.boxShadow = "none")}
+          >
+            <div className="card-icon">
+              <span
+                className="material-symbols-outlined"
+                style={{ fontSize: "60px" }}
+              >
+                recycling
+              </span>
+            </div>
             <h3>Smart Recycling</h3>
-            <p>Learn proper recycling techniques and find the best ways to dispose of different materials.</p>
+            <p>
+              Learn proper recycling techniques and find the best ways to
+              dispose of different materials.
+            </p>
           </div>
-          
-          <div className="card">
-            <div className="card-icon">Calendar</div>
+
+          <div
+            className="card"
+            onMouseEnter={(e) =>
+              (e.currentTarget.style.boxShadow = "0 0 15px green")
+            }
+            onMouseLeave={(e) => (e.currentTarget.style.boxShadow = "none")}
+          >
+            <div className="card-icon">
+              <span
+                className="material-symbols-outlined"
+                style={{ fontSize: "60px" }}
+              >
+                calendar_month
+              </span>
+            </div>
             <h3>Collection Schedule</h3>
-            <p>Never miss collection days with smart notifications and optimized pickup schedules.</p>
+            <p>
+              Never miss collection days with smart notifications and optimized
+              pickup schedules.
+            </p>
           </div>
-          
-          <div className="card">
-            <div className="card-icon">Globe</div>
+
+          <div
+            className="card"
+            onMouseEnter={(e) =>
+              (e.currentTarget.style.boxShadow = "0 0 15px green")
+            }
+            onMouseLeave={(e) => (e.currentTarget.style.boxShadow = "none")}
+          >
+            <div className="card-icon">
+              <span
+                className="material-symbols-outlined"
+                style={{ fontSize: "60px" }}
+              >
+                globe
+              </span>
+            </div>
             <h3>Community Impact</h3>
-            <p>Join a growing community committed to sustainable waste management practices.</p>
+            <p>
+              Join a growing community committed to sustainable waste management
+              practices.
+            </p>
           </div>
         </div>
       </section>
@@ -108,25 +185,25 @@ const Home = () => {
         <div className="stats-grid">
           <div className="stat-item">
             <h3>
-              {isVisible ? <AnimatedCounter end={50000} suffix="K+" /> : '0K+'}
+              {isVisible ? <AnimatedCounter end={50000} suffix="K+" /> : "0K+"}
             </h3>
             <p>Active Users</p>
           </div>
           <div className="stat-item">
             <h3>
-              {isVisible ? <AnimatedCounter end={120} suffix="T" /> : '0T'}
+              {isVisible ? <AnimatedCounter end={120} suffix="T" /> : "0T"}
             </h3>
             <p>Waste Recycled</p>
           </div>
           <div className="stat-item">
             <h3>
-              {isVisible ? <AnimatedCounter end={45} suffix="%" /> : '0%'}
+              {isVisible ? <AnimatedCounter end={45} suffix="%" /> : "0%"}
             </h3>
             <p>Reduction in Landfill</p>
           </div>
           <div className="stat-item">
             <h3>
-              {isVisible ? <AnimatedCounter end={200} suffix="+" /> : '0+'}
+              {isVisible ? <AnimatedCounter end={200} suffix="+" /> : "0+"}
             </h3>
             <p>Communities</p>
           </div>
@@ -139,7 +216,8 @@ const Home = () => {
           <div className="text-center">
             <h2 className="page-title">Ready to Make a Difference?</h2>
             <p className="mb-3">
-              Start your journey towards sustainable waste management today. Together, we can create a cleaner, greener planet.
+              Start your journey towards sustainable waste management today.
+              Together, we can create a cleaner, greener planet.
             </p>
             <div className="flex justify-center gap-2 flex-wrap">
               {user ? (
@@ -147,7 +225,14 @@ const Home = () => {
                   <Link to="/tracker" className="btn btn-primary">
                     Track Your Waste
                   </Link>
-                  <Link to="/education" className="btn" style={{ background: 'var(--secondary-color)', color: 'white' }}>
+                  <Link
+                    to="/education"
+                    className="btn"
+                    style={{
+                      background: "var(--secondary-color)",
+                      color: "white",
+                    }}
+                  >
                     Learn More
                   </Link>
                 </>
@@ -156,7 +241,14 @@ const Home = () => {
                   <Link to="/register" className="btn btn-primary">
                     Get Started Free
                   </Link>
-                  <Link to="/login" className="btn" style={{ background: 'var(--secondary-color)', color: 'white' }}>
+                  <Link
+                    to="/login"
+                    className="btn"
+                    style={{
+                      background: "var(--secondary-color)",
+                      color: "white",
+                    }}
+                  >
                     Sign In
                   </Link>
                 </>
