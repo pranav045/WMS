@@ -15,36 +15,36 @@ const Contact = () => {
     });
   };
 
-const handleSubmit = async (e) => {
-  e.preventDefault();
+  const handleSubmit = async (e) => {
+    e.preventDefault();
 
-  try {
-    const response = await fetch('http://localhost:5000/api/contact', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify(formData),
-    });
-
-    const data = await response.json();
-
-    if (data.success) {
-      alert(data.message || "Thank you! We'll get back to you soon.");
-      setFormData({
-        name: "",
-        email: "",
-        subject: "",
-        message: "",
+    try {
+      const response = await fetch("http://localhost:5000/api/contact", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(formData),
       });
-    } else {
-      alert(data.message || "Something went wrong. Please try again.");
+
+      const data = await response.json();
+
+      if (data.success) {
+        alert(data.message || "Thank you! We'll get back to you soon.");
+        setFormData({
+          name: "",
+          email: "",
+          subject: "",
+          message: "",
+        });
+      } else {
+        alert(data.message || "Something went wrong. Please try again.");
+      }
+    } catch (error) {
+      console.error("Error sending message:", error);
+      alert("Failed to send message. Please check your connection.");
     }
-  } catch (error) {
-    console.error("Error sending message:", error);
-    alert("Failed to send message. Please check your connection.");
-  }
-};
+  };
 
   return (
     <>
@@ -359,7 +359,8 @@ select.form-input option {
         <div className="contact-header">
           <h1 className="contact-title">Get In Touch</h1>
           <p className="contact-subtitle">
-            Have questions about waste management? Our team is here to help you create a sustainable future.
+            Have questions about waste management? Our team is here to help you
+            create a sustainable future.
           </p>
         </div>
 
@@ -369,10 +370,10 @@ select.form-input option {
           <div>
             <div className="contact-card">
               <h3 className="card-title">
-                <span>📧</span>
+                <span class="material-symbols-outlined">send</span>
                 Send us a Message
               </h3>
-              
+
               <form onSubmit={handleSubmit}>
                 <div className="form-group">
                   <label className="form-label">Full Name</label>
@@ -441,14 +442,16 @@ select.form-input option {
             <div className="emergency-section">
               <div className="emergency-card">
                 <div className="emergency-header">
-                  <span className="emergency-icon">🚨</span>
+                  <span className="emergency-icon">
+                    <span class="material-symbols-outlined">siren</span>
+                  </span>
                   <h3 className="emergency-title">Emergency Contact</h3>
                 </div>
                 <p className="emergency-description">
                   For hazardous waste spills or immediate environmental concerns
                 </p>
                 <div className="emergency-phone">
-                  <span>📞</span>
+                  <span class="material-symbols-outlined">call</span>
                   +1 (555) 123-EMER
                 </div>
                 <p className="emergency-note">24/7 Emergency Response Line</p>
@@ -461,40 +464,67 @@ select.form-input option {
             {/* Contact Information */}
             <div className="contact-card">
               <h3 className="card-title">
-                <span>📍</span>
+                {/* <span></span> */}
+                <span class="material-symbols-outlined">contact_page</span>
                 Contact Information
               </h3>
-              
+
               <div className="contact-info">
                 <div className="info-item">
-                  <div className="info-icon">📧</div>
+                  <div className="info-icon">
+                    <span class="material-symbols-outlined">mail</span>
+                  </div>
                   <div className="info-content">
                     <h4>Email</h4>
-                    <p>info@ecowaste.com<br/>support@ecowaste.com</p>
+                    <p>
+                      info@ecowaste.com
+                      <br />
+                      support@ecowaste.com
+                    </p>
                   </div>
                 </div>
 
                 <div className="info-item">
-                  <div className="info-icon">📞</div>
+                  <div className="info-icon">
+                    <span class="material-symbols-outlined">call</span>
+                  </div>
                   <div className="info-content">
                     <h4>Phone</h4>
-                    <p>+91 0000000001 ECOW<br/>+91 0000000002-HELP</p>
+                    <p>
+                      +91 0000000001 ECOW
+                      <br />
+                      +91 0000000002-HELP
+                    </p>
                   </div>
                 </div>
 
                 <div className="info-item">
-                  <div className="info-icon">🏢</div>
+                  <div className="info-icon">
+                    <span class="material-symbols-outlined">apartment</span>
+                  </div>
                   <div className="info-content">
                     <h4>Office</h4>
-                    <p>123 Jalandhar<br/>Eco City, EC 12345</p>
+                    <p>
+                      123 Jalandhar
+                      <br />
+                      Eco City, EC 12345
+                    </p>
                   </div>
                 </div>
 
                 <div className="info-item">
-                  <div className="info-icon">🕒</div>
+                  <div className="info-icon">
+                    <span class="material-symbols-outlined">schedule</span>
+                  </div>
                   <div className="info-content">
                     <h4>Business Hours</h4>
-                    <p>Mon-Fri: 9AM-6PM<br/>Sat: 10AM-4PM<br/>Sun: Closed</p>
+                    <p>
+                      Mon-Fri: 9AM-6PM
+                      <br />
+                      Sat: 10AM-4PM
+                      <br />
+                      Sun: Closed
+                    </p>
                   </div>
                 </div>
               </div>
@@ -507,21 +537,32 @@ select.form-input option {
                   <span>❓</span>
                   Quick Answers
                 </h3>
-                
+
                 <div className="faq-grid">
                   <div className="faq-item">
-                    <div className="faq-question">How do I start recycling?</div>
-                    <p className="faq-answer">Sort waste into categories and use our waste tracker for personalized guidance.</p>
+                    <div className="faq-question">
+                      How do I start recycling?
+                    </div>
+                    <p className="faq-answer">
+                      Sort waste into categories and use our waste tracker for
+                      personalized guidance.
+                    </p>
                   </div>
 
                   <div className="faq-item">
                     <div className="faq-question">What can't be recycled?</div>
-                    <p className="faq-answer">Plastic bags, styrofoam, greasy boxes require special handling.</p>
+                    <p className="faq-answer">
+                      Plastic bags, styrofoam, greasy boxes require special
+                      handling.
+                    </p>
                   </div>
 
                   <div className="faq-item">
                     <div className="faq-question">Collection schedule?</div>
-                    <p className="faq-answer">Check our collection page for your area's specific pickup days.</p>
+                    <p className="faq-answer">
+                      Check our collection page for your area's specific pickup
+                      days.
+                    </p>
                   </div>
                 </div>
               </div>
