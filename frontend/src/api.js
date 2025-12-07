@@ -1,7 +1,9 @@
+// src/api.jsx
 import axios from "axios";
 
 const API = axios.create({
-  baseURL: "https://wms-b7au.onrender.com/api", // Render backend
+  baseURL: import.meta.env.VITE_API_URL || "http://localhost:5000/api",
+  withCredentials: true,
 });
 
 export default API;

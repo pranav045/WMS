@@ -1,13 +1,12 @@
 import React, { createContext, useState, useContext, useEffect } from 'react';
 import API from "../api";
 
-
 const AuthContext = createContext();
 
 export const useAuth = () => {
   const context = useContext(AuthContext);
   if (!context) {
-    throw new Error('useAuth must be used within an AuthProvider');
+    throw new Error("useAuth must be used within an AuthProvider");
   }
   return context;
 };
@@ -15,7 +14,7 @@ export const useAuth = () => {
 export const AuthProvider = ({ children }) => {
   const [user, setUser] = useState(null);
   const [loading, setLoading] = useState(true);
-  const [error, setError] = useState('');
+  const [error, setError] = useState("");
 
   useEffect(() => {
     checkAuthStatus();
@@ -23,24 +22,24 @@ export const AuthProvider = ({ children }) => {
 
   const checkAuthStatus = async () => {
     try {
-      const token = localStorage.getItem('token');
-      const userData = localStorage.getItem('user');
+      const token = localStorage.getItem("token");
 
-      if (token && userData) {
-        // Verify token is still valid
-        const response = await API.get('http://localhost:5000/api/auth/me', {
-          headers: { Authorization: `Bearer ${token}` }
-        });
-
-        if (response.data.success) {
-          setUser(response.data.user);
-          API.defaults.headers.common['Authorization'] = `Bearer ${token}`;
-        } else {
-          logout();
-        }
+      if (!token) {
+        setLoading(false);
+        return;
       }
-    } catch (error) {
-      console.error('Auth check failed:', error);
+
+      API.defaults.headers.common["Authorization"] = `Bearer ${token}`;
+      const response = await API.get("/auth/me");
+
+      if (response.data.success) {
+        setUser(response.data.user);
+      } else {
+        logout();
+      }
+
+    } catch (err) {
+      console.error("Auth check failed:", err.response?.data || err.message);
       logout();
     } finally {
       setLoading(false);
@@ -48,32 +47,21 @@ export const AuthProvider = ({ children }) => {
   };
 
   const login = (userData, token) => {
+    localStorage.setItem("token", token);
+    localStorage.setItem("user", JSON.stringify(userData));
+    API.defaults.headers.common["Authorization"] = `Bearer ${token}`;
     setUser(userData);
-    setError('');
-    localStorage.setItem('token', token);
-    localStorage.setItem('user', JSON.stringify(userData));
-    API.defaults.headers.common['Authorization'] = `Bearer ${token}`;
   };
 
   const logout = () => {
+    localStorage.removeItem("token");
+    localStorage.removeItem("user");
+    delete API.defaults.headers.common["Authorization"];
     setUser(null);
-    setError('');
-    localStorage.removeItem('token');
-    localStorage.removeItem('user');
-    delete API.defaults.headers.common['Authorization'];
-  };
-
-  const value = {
-    user,
-    login,
-    logout,
-    loading,
-    error,
-    setError
   };
 
   return (
-    <AuthContext.Provider value={value}>
+    <AuthContext.Provider value={{ user, login, logout, loading, error, setError }}>
       {children}
     </AuthContext.Provider>
   );
