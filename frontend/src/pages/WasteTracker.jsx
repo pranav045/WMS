@@ -1,16 +1,17 @@
 // pages/WasteTracker.js (FIXED VISIBILITY ISSUES)
 import React, { useState, useEffect,useRef} from 'react';
 import { createUseStyles } from 'react-jss';
-import axios from 'axios';
+import API from "../api";
+
 import { useAuth } from '../context/AuthContext';
 
 const API_BASE = 'http://localhost:5000/api';
 
 const wasteAPI = {
-  saveEntry: async (entry) => axios.post(`${API_BASE}/waste/entries`, entry),
-  getUserEntries: async () => axios.get(`${API_BASE}/waste/entries`),
-  deleteEntry: async (entryId) => axios.delete(`${API_BASE}/waste/entries/${entryId}`),
-  updateEntry: async (entryId, updates) => axios.put(`${API_BASE}/waste/entries/${entryId}`, updates),
+  saveEntry: async (entry) => API.post(`${API_BASE}/waste/entries`, entry),
+  getUserEntries: async () => API.get(`${API_BASE}/waste/entries`),
+  deleteEntry: async (entryId) => API.delete(`${API_BASE}/waste/entries/${entryId}`),
+  updateEntry: async (entryId, updates) => API.put(`${API_BASE}/waste/entries/${entryId}`, updates),
 };
 
 const useStyles = createUseStyles({

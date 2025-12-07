@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
-import axios from 'axios';
+import API from "../api" ;
+
 
 const Register = () => {
   const [formData, setFormData] = useState({
@@ -60,11 +61,11 @@ const Register = () => {
     try {
       const { confirmPassword, ...submitData } = formData;
 
-      const response = await axios.post('http://localhost:5000/api/auth/register', submitData);
+      const response = await API.post('http://localhost:5000/api/auth/register', submitData);
 
       localStorage.setItem('token', response.data.token);
       localStorage.setItem('user', JSON.stringify(response.data.user));
-      axios.defaults.headers.common['Authorization'] = `Bearer ${response.data.token}`;
+      API.defaults.headers.common['Authorization'] = `Bearer ${response.data.token}`;
 
       navigate('/dashboard');
     } catch (error) {

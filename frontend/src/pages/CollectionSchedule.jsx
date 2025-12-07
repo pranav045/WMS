@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
-import axios from 'axios';
+import API from "../api";
+
 import { useAuth } from '../context/AuthContext';
 
 const getCountdown = (targetDateStr) => {
@@ -113,7 +114,7 @@ const CollectionSchedule = () => {
 
   const getToken = () => localStorage.getItem('token');
 
-  const api = axios.create({
+  const api = API.create({
     baseURL: process.env.NODE_ENV === 'development' ? 'http://localhost:5000/api' : '/api',
     headers: { Authorization: `Bearer ${getToken()}` }
   });
@@ -155,7 +156,7 @@ const CollectionSchedule = () => {
     if (!user) return;
     setLoading(true);
     try {
-      const [scheduleRes, pointsRes] = await Promise.all([api.get('/collection/schedule'), api.get('/collection/points')]);
+      const [scheduleRes, pointsRes] = await Promise.all([API.get('/collection/schedule'), API.get('/collection/points')]);
       const now = new Date();
       const mappedSchedule = scheduleRes.data.map(item => ({
         id: item.id, type: item.types[0] || 'General Waste', date: item.nextPickup, status: item.status,
@@ -301,7 +302,7 @@ const CollectionSchedule = () => {
     const itemId = item.id;
     setReminderLoading(prev => ({ ...prev, [itemId]: true }));
     try {
-      const response = await api.post('/collection/set-reminder', { scheduleId: item.id, reminderTime: 24, nextPickup: item.date });
+      const response = await API.post('/collection/set-reminder', { scheduleId: item.id, reminderTime: 24, nextPickup: item.date });
       if (response.data.success) {
         showMessage('Reminder set successfully. Notification scheduled 24 hours prior.', 'success');
         if (Notification.permission === 'granted') {
@@ -334,7 +335,7 @@ const CollectionSchedule = () => {
     if (!selectedItem || !issueType || !description.trim()) return showMessage('Please fill all fields.', 'error');
     setSubmitLoading(true);
     try {
-      const response = await api.post('/collection/report-issue', { scheduleId: selectedItem.id, issueType, description });
+      const response = await API.post('/collection/report-issue', { scheduleId: selectedItem.id, issueType, description });
       if (response.data.success) showMessage(`Issue reported successfully. Ticket: ${response.data.ticketId}.`, 'success');
       else throw new Error('Invalid response');
     } catch (error) {

@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
-import axios from 'axios';
+import API from "../api" ;
+
 import { useAuth } from '../context/AuthContext';
 
 const Login = () => {
@@ -34,12 +35,12 @@ const Login = () => {
     }
 
     try {
-      const response = await axios.post('http://localhost:5000/api/auth/login', formData);
+      const response = await API.post('http://localhost:5000/api/auth/login', formData);
 
       if (response.data.success) {
         localStorage.setItem('token', response.data.token);
         localStorage.setItem('user', JSON.stringify(response.data.user));
-        axios.defaults.headers.common['Authorization'] = `Bearer ${response.data.token}`;
+        API.defaults.headers.common['Authorization'] = `Bearer ${response.data.token}`;
         login(response.data.user, response.data.token);
         navigate('/dashboard');
       } else {
@@ -63,12 +64,12 @@ const Login = () => {
     setError('');
 
     try {
-      const response = await axios.post('http://localhost:5000/api/auth/demo');
+      const response = await API.post('http://localhost:5000/api/auth/demo');
 
       if (response.data.success) {
         localStorage.setItem('token', response.data.token);
         localStorage.setItem('user', JSON.stringify(response.data.user));
-        axios.defaults.headers.common['Authorization'] = `Bearer ${response.data.token}`;
+        API.defaults.headers.common['Authorization'] = `Bearer ${response.data.token}`;
         login(response.data.user, response.data.token);
         navigate('/dashboard');
       } else {

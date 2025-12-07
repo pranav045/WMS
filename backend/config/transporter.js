@@ -15,12 +15,12 @@ const transporter = nodemailer.createTransport({
 });
 
 // Optional: Verify transporter connection
-transporter.verify(function (error, success) {
-  if (error) {
-    console.log("❌ SMTP Verify Error:", error);
-  } else {
-    console.log("📧 Server is ready to take messages");
-  }
-});
+// transporter.verify(function (error, success) {
+//   if (error) {
+//     console.log("❌ SMTP Verify Error:", error);
+//   } else {
+//     console.log("📧 Server is ready to take messages");
+//   }
+// });
 
 export default transporter;

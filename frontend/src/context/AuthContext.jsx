@@ -1,5 +1,6 @@
 import React, { createContext, useState, useContext, useEffect } from 'react';
-import axios from 'axios';
+import API from "../api";
+
 
 const AuthContext = createContext();
 
@@ -27,13 +28,13 @@ export const AuthProvider = ({ children }) => {
 
       if (token && userData) {
         // Verify token is still valid
-        const response = await axios.get('http://localhost:5000/api/auth/me', {
+        const response = await API.get('http://localhost:5000/api/auth/me', {
           headers: { Authorization: `Bearer ${token}` }
         });
 
         if (response.data.success) {
           setUser(response.data.user);
-          axios.defaults.headers.common['Authorization'] = `Bearer ${token}`;
+          API.defaults.headers.common['Authorization'] = `Bearer ${token}`;
         } else {
           logout();
         }
@@ -51,7 +52,7 @@ export const AuthProvider = ({ children }) => {
     setError('');
     localStorage.setItem('token', token);
     localStorage.setItem('user', JSON.stringify(userData));
-    axios.defaults.headers.common['Authorization'] = `Bearer ${token}`;
+    API.defaults.headers.common['Authorization'] = `Bearer ${token}`;
   };
 
   const logout = () => {
@@ -59,7 +60,7 @@ export const AuthProvider = ({ children }) => {
     setError('');
     localStorage.removeItem('token');
     localStorage.removeItem('user');
-    delete axios.defaults.headers.common['Authorization'];
+    delete API.defaults.headers.common['Authorization'];
   };
 
   const value = {
