@@ -1,23 +1,21 @@
 const jwt = require('jsonwebtoken');
 
 const auth = (req, res, next) => {
-  // Skip token check for CORS preflight requests
-  if (req.method === "OPTIONS") {
-    return res.sendStatus(200);
+  // LET THE REQUEST PASS SILENTLY IF NO TOKEN
+  const token = req.header("Authorization")?.replace("Bearer ", "");
+
+  if (!token) {
+    req.userId = null; // Let frontend know: user is guest
+    return next();
   }
 
   try {
-    const token = req.header('Authorization')?.replace('Bearer ', '');
-
-    if (!token) {
-      return res.status(401).json({ message: 'No token provided, access denied' });
-    }
-
-    const decoded = jwt.verify(token, process.env.JWT_SECRET || 'waste_management_secret_key_2024');
+    const decoded = jwt.verify(token, process.env.JWT_SECRET || "waste_management_secret_key_2024");
     req.userId = decoded.userId;
     next();
   } catch (error) {
-    return res.status(401).json({ message: 'Token is not valid' });
+    req.userId = null;
+    return next(); // Do NOT block with 401 because frontend calls /auth/me to check login status
   }
 };
 
