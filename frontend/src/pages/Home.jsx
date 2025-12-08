@@ -4,16 +4,13 @@ import { useAuth } from "../context/AuthContext";
 
 const Home = () => {
   const { user } = useAuth();
+
+  // State to trigger count-up when section is visible
   const [isVisible, setIsVisible] = useState(false);
   const statsRef = useRef(null);
 
+  // Simple intersection observer to detect when stats enter viewport
   useEffect(() => {
-    // Polyfill check for older browsers
-    if (!window.IntersectionObserver) {
-      setIsVisible(true); // Fallback: show immediately
-      return;
-    }
-
     const observer = new IntersectionObserver(
       ([entry]) => {
         if (entry.isIntersecting) {
@@ -31,9 +28,9 @@ const Home = () => {
     return () => observer.disconnect();
   }, []);
 
+  // Animated counter component
   const AnimatedCounter = ({ end, suffix = "", duration = 2.5 }) => {
     const [count, setCount] = useState(0);
-    const rafRef = useRef(null);
 
     useEffect(() => {
       if (!isVisible) return;
@@ -46,28 +43,25 @@ const Home = () => {
         setCount(Math.floor(end * percentage));
 
         if (percentage < 1) {
-          rafRef.current = requestAnimationFrame(animate);
+          requestAnimationFrame(animate);
         } else {
           setCount(end);
         }
       };
 
-      rafRef.current = requestAnimationFrame(animate);
-      return () => {
-        if (rafRef.current) cancelAnimationFrame(rafRef.current);
-      };
+      requestAnimationFrame(animate);
     }, [isVisible, end, duration]);
 
     return (
-      <span aria-live="polite">
-        {count.toLocaleString()}
+      <>
+        {count}
         {suffix}
-      </span>
+      </>
     );
   };
 
   return (
-    <main className="w-full">
+    <div className="w-full">
       {/* Hero Section */}
       <section className="hero">
         <div className="hero-content">
@@ -82,14 +76,11 @@ const Home = () => {
               Go to Dashboard
             </Link>
           ) : (
-            <Link
-              to="/register"
-              className="btn btn-primary"
-              onMouseEnter={(e) =>
-                (e.currentTarget.style.boxShadow = "0 0 15px green")
-              }
-              onMouseLeave={(e) => (e.currentTarget.style.boxShadow = "none")}
-            >
+            <Link to="/register" className="btn btn-primary" 
+            onMouseEnter={(e) =>
+              (e.currentTarget.style.boxShadow = "0 0 15px white")
+            }
+            onMouseLeave={(e) => (e.currentTarget.style.boxShadow = "none")}>
               Start Your Eco Journey
             </Link>
           )}
@@ -97,9 +88,9 @@ const Home = () => {
       </section>
 
       {/* Features Section */}
-      <section className="features-section">
+      <section>
         <div className="card-grid">
-          <article
+          <div
             className="card"
             onMouseEnter={(e) =>
               (e.currentTarget.style.boxShadow = "0 0 15px green")
@@ -107,7 +98,10 @@ const Home = () => {
             onMouseLeave={(e) => (e.currentTarget.style.boxShadow = "none")}
           >
             <div className="card-icon">
-              <span className="material-symbols-outlined" style={{ fontSize: "60px" }}>
+              <span
+                className="material-symbols-outlined"
+                style={{ fontSize: "60px" }}
+              >
                 bar_chart
               </span>
             </div>
@@ -116,9 +110,9 @@ const Home = () => {
               Monitor your waste production patterns and get insights to reduce
               your environmental footprint.
             </p>
-          </article>
+          </div>
 
-          <article
+          <div
             className="card"
             onMouseEnter={(e) =>
               (e.currentTarget.style.boxShadow = "0 0 15px green")
@@ -126,7 +120,10 @@ const Home = () => {
             onMouseLeave={(e) => (e.currentTarget.style.boxShadow = "none")}
           >
             <div className="card-icon">
-              <span className="material-symbols-outlined" style={{ fontSize: "60px" }}>
+              <span
+                className="material-symbols-outlined"
+                style={{ fontSize: "60px" }}
+              >
                 recycling
               </span>
             </div>
@@ -135,9 +132,9 @@ const Home = () => {
               Learn proper recycling techniques and find the best ways to
               dispose of different materials.
             </p>
-          </article>
+          </div>
 
-          <article
+          <div
             className="card"
             onMouseEnter={(e) =>
               (e.currentTarget.style.boxShadow = "0 0 15px green")
@@ -145,7 +142,10 @@ const Home = () => {
             onMouseLeave={(e) => (e.currentTarget.style.boxShadow = "none")}
           >
             <div className="card-icon">
-              <span className="material-symbols-outlined" style={{ fontSize: "60px" }}>
+              <span
+                className="material-symbols-outlined"
+                style={{ fontSize: "60px" }}
+              >
                 calendar_month
               </span>
             </div>
@@ -154,9 +154,9 @@ const Home = () => {
               Never miss collection days with smart notifications and optimized
               pickup schedules.
             </p>
-          </article>
+          </div>
 
-          <article
+          <div
             className="card"
             onMouseEnter={(e) =>
               (e.currentTarget.style.boxShadow = "0 0 15px green")
@@ -164,7 +164,10 @@ const Home = () => {
             onMouseLeave={(e) => (e.currentTarget.style.boxShadow = "none")}
           >
             <div className="card-icon">
-              <span className="material-symbols-outlined" style={{ fontSize: "60px" }}>
+              <span
+                className="material-symbols-outlined"
+                style={{ fontSize: "60px" }}
+              >
                 globe
               </span>
             </div>
@@ -173,34 +176,34 @@ const Home = () => {
               Join a growing community committed to sustainable waste management
               practices.
             </p>
-          </article>
+          </div>
         </div>
       </section>
 
-      {/* Stats Section */}
+      {/* Stats Section - NOW DYNAMIC */}
       <section className="stats-section" ref={statsRef}>
         <div className="stats-grid">
           <div className="stat-item">
             <h3>
-              {isVisible ? <AnimatedCounter end={50000} suffix="K+" /> : "50K+"}
+              {isVisible ? <AnimatedCounter end={50000} suffix="K+" /> : "0K+"}
             </h3>
             <p>Active Users</p>
           </div>
           <div className="stat-item">
             <h3>
-              {isVisible ? <AnimatedCounter end={120} suffix="T" /> : "120T"}
+              {isVisible ? <AnimatedCounter end={120} suffix="T" /> : "0T"}
             </h3>
             <p>Waste Recycled</p>
           </div>
           <div className="stat-item">
             <h3>
-              {isVisible ? <AnimatedCounter end={45} suffix="%" /> : "45%"}
+              {isVisible ? <AnimatedCounter end={45} suffix="%" /> : "0%"}
             </h3>
             <p>Reduction in Landfill</p>
           </div>
           <div className="stat-item">
             <h3>
-              {isVisible ? <AnimatedCounter end={200} suffix="+" /> : "200+"}
+              {isVisible ? <AnimatedCounter end={200} suffix="+" /> : "0+"}
             </h3>
             <p>Communities</p>
           </div>
@@ -208,7 +211,7 @@ const Home = () => {
       </section>
 
       {/* CTA Section */}
-      <section className="cta-section p-4">
+      <section className="p-4">
         <div className="container">
           <div className="text-center">
             <h2 className="page-title">Ready to Make a Difference?</h2>
@@ -222,7 +225,14 @@ const Home = () => {
                   <Link to="/tracker" className="btn btn-primary">
                     Track Your Waste
                   </Link>
-                  <Link to="/education" className="btn btn-secondary">
+                  <Link
+                    to="/education"
+                    className="btn"
+                    style={{
+                      background: "var(--secondary-color)",
+                      color: "white",
+                    }}
+                  >
                     Learn More
                   </Link>
                 </>
@@ -231,7 +241,14 @@ const Home = () => {
                   <Link to="/register" className="btn btn-primary">
                     Get Started Free
                   </Link>
-                  <Link to="/login" className="btn btn-secondary">
+                  <Link
+                    to="/login"
+                    className="btn"
+                    style={{
+                      background: "var(--secondary-color)",
+                      color: "white",
+                    }}
+                  >
                     Sign In
                   </Link>
                 </>
@@ -240,7 +257,7 @@ const Home = () => {
           </div>
         </div>
       </section>
-    </main>
+    </div>
   );
 };
 

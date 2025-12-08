@@ -3,6 +3,7 @@ import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import { AuthProvider, useAuth } from './context/AuthContext';
 import ScrollToTop from "./ScrollToTop";
 import './App.css';
+ // Or wherever your CSS is
 
 // Components
 import Navbar from './components/Navbar';
