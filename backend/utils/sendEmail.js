@@ -1,5 +1,3 @@
-const fetch = require("node-fetch");
-
 const sendEmail = async ({ name, email, message }) => {
   const apiKey = process.env.RESEND_API_KEY;
   const to = process.env.EMAIL_TO;
@@ -19,6 +17,11 @@ const sendEmail = async ({ name, email, message }) => {
     },
     body: JSON.stringify(payload),
   });
+
+  if (!response.ok) {
+    const error = await response.text();
+    throw new Error(error);
+  }
 
   return response.json();
 };
