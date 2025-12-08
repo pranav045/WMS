@@ -115,7 +115,7 @@ const CollectionSchedule = () => {
   const getToken = () => localStorage.getItem('token');
 
   const api = API.create({
-    baseURL: process.env.NODE_ENV === 'development' ? 'http://localhost:5000/api' : '/api',
+    baseURL: process.env.NODE_ENV === 'development' ? 'https://wms-b7au.onrender.com/api' : '/api',
     headers: { Authorization: `Bearer ${getToken()}` }
   });
 

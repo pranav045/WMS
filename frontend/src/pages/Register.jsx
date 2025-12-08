@@ -61,7 +61,7 @@ const Register = () => {
     try {
       const { confirmPassword, ...submitData } = formData;
 
-      const response = await API.post('http://localhost:5000/api/auth/register', submitData);
+      const response = await API.post('https://wms-b7au.onrender.com/api/auth/register', submitData);
 
       localStorage.setItem('token', response.data.token);
       localStorage.setItem('user', JSON.stringify(response.data.user));

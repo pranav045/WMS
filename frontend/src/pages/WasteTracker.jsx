@@ -5,7 +5,7 @@ import API from "../api";
 
 import { useAuth } from '../context/AuthContext';
 
-const API_BASE = 'http://localhost:5000/api';
+const API_BASE = 'https://wms-b7au.onrender.com/api';
 
 const wasteAPI = {
   saveEntry: async (entry) => API.post(`${API_BASE}/waste/entries`, entry),

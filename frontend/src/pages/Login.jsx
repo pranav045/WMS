@@ -35,7 +35,7 @@ const Login = () => {
     }
 
     try {
-      const response = await API.post('http://localhost:5000/api/auth/login', formData);
+      const response = await API.post('https://wms-b7au.onrender.com/api/auth/login', formData);
 
       if (response.data.success) {
         localStorage.setItem('token', response.data.token);
@@ -64,7 +64,7 @@ const Login = () => {
     setError('');
 
     try {
-      const response = await API.post('http://localhost:5000/api/auth/demo');
+      const response = await API.post('https://wms-b7au.onrender.com/api/auth/demo');
 
       if (response.data.success) {
         localStorage.setItem('token', response.data.token);
