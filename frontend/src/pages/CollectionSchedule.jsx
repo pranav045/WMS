@@ -300,33 +300,36 @@ const CollectionSchedule = () => {
   };
 
   const handleRemindMe = async (item) => {
-    if (!user) return showMessage('Please log in to set reminders.', 'error');
-    const itemId = item.id;
-    setReminderLoading(prev => ({ ...prev, [itemId]: true }));
-    try {
-      const response = await api.post('/collection/set-reminder', { scheduleId: item.id, reminderTime: 24, nextPickup: item.date });
-      if (response.data.success) {
-        showMessage('Reminder set successfully. Notification scheduled 24 hours prior.', 'success');
-        if (Notification.permission === 'granted') {
-          const countdown = getCountdown(item.date);
-          new Notification('Collection Reminder', { body: `${item.type} collection in ${countdown.text}. Prepare ${item.items.join(', ')}.` });
-        } else if (Notification.permission !== 'denied') {
-          Notification.requestPermission().then(permission => permission === 'granted' && (() => {
-            const countdown = getCountdown(item.date);
-            new Notification('Collection Reminder', { body: `${item.type} collection in ${countdown.text}. Prepare ${item.items.join(', ')}.` });
-          })());
-        }
-      } else throw new Error('Invalid response');
-    } catch (error) {
-      console.error('Failed to set reminder:', error);
-      if (error.response?.status === 401) {
-        showMessage('Session expired. Please log in again.', 'error');
-        logout();
-      } else showMessage('Failed to set reminder. Please check your connection.', 'error');
-    } finally {
-      setReminderLoading(prev => ({ ...prev, [itemId]: false }));
+  if (!user) return showMessage('Please log in to set reminders.', 'error');
+
+  const itemId = item.id;
+  setReminderLoading(prev => ({ ...prev, [itemId]: true }));
+
+  try {
+    const pickupDate = new Date(item.nextPickup || item.date);
+
+    const response = await api.post('/collection/set-reminder', { 
+      scheduleId: item.id, 
+      reminderTime: 24, 
+      nextPickup: pickupDate.toISOString() 
+    });
+
+    if (response.data.success) {
+      showMessage('Reminder set successfully!', 'success');
+    } else throw new Error('Invalid response');
+
+  } catch (error) {
+    console.error('Reminder Error:', error);
+    if (error.response?.status === 401) {
+      showMessage('Session expired. Please log in again.', 'error');
+      logout();
+    } else {
+      showMessage('Failed to set reminder. Try again.', 'error');
     }
-  };
+  } finally {
+    setReminderLoading(prev => ({ ...prev, [itemId]: false }));
+  }
+};
 
   const handleReportIssue = () => {
     if (!user) return showMessage('Please log in to report issues.', 'error');
