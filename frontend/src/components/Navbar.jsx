@@ -55,86 +55,57 @@ const Navbar = () => {
           color: #2E8B57;
           display: flex;
           align-items: center;
-          gap: 1px;
         }
         .logo:hover { color: #236B4E; }
 
-        .nav-main { display: flex; align-items: center; gap: 32px; }
+        .nav-main {
+          display: flex;
+          align-items: center;
+          gap: 32px;
+        }
 
         .nav-links {
           list-style: none;
           display: flex;
           gap: 32px;
-          margin: 0;
-          padding: 0;
-          margin-left: 20px;
-        margin-right: -12px; 
+          margin-right: -12px;
         }
 
+        /* NAV underline */
         .nav-links li a {
+          position: relative;
+          display: inline-block;
+          padding: 8px 12px;
+          color: #4B5563;
           text-decoration: none;
           font-weight: 500;
           font-size: 15px;
-          color: #4B5563;
-          padding: 8px 12px;
-          border-radius: 6px;
-          transition: all 0.2s ease;
-          
+          transition: color 0.18s ease;
         }
-    /* NAV LINK - underline animation (replace previous .nav-links li a rules) */
-.nav-links li a {
-  position: relative;         /* needed for ::after positioning */
-  display: inline-block;      /* allows width transitions */
-  padding: 8px 12px;          /* keep your original padding */
-  color: #4B5563;             /* default color */
-  text-decoration: none;
-  font-weight: 500;
-  font-size: 15px;
-  transition: color 0.18s ease;
-  background: transparent;    /* ensure no hover background overrides underline */
-}
+        .nav-links li a::after {
+          content: "";
+          position: absolute;
+          left: 0;
+          bottom: -6px;
+          width: 0%;
+          height: 3px;
+          background: #2E8B57;
+          border-radius: 2px;
+          transition: width 0.25s ease-in-out;
+        }
+        .nav-links li a:hover,
+        .nav-links li a.active {
+          color: #2E8B57;
+        }
+        .nav-links li a:hover::after,
+        .nav-links li a.active::after {
+          width: 100%;
+        }
 
-/* underline element */
-.nav-links li a::after {
-  content: "";
-  position: absolute;
-  left: 0;
-  bottom: -6px;               /* distance from link baseline — adjust if needed */
-  width: 0%;
-  height: 3px;
-  background: #2E8B57;
-  border-radius: 2px;
-  transition: width 0.25s ease-in-out;
-  will-change: width;
-}
-
-/* Hover: reveal underline and change color */
-.nav-links li a:hover {
-  color: #2E8B57;
-}
-.nav-links li a:hover::after {
-  width: 100%;
-}
-
-/* Active state: keep underline visible */
-.nav-links li a.active {
-  color: #2E8B57;
-  font-weight: 600;
-}
-.nav-links li a.active::after {
-  width: 100%;
-}
-
-/* Fallback: if some other rule overrides, use higher specificity */
-.nav-links li a:hover::after,
-.nav-links li a.active::after {
-  /* uncomment the next line only if you still see no underline */
-  /* width: 100% !important; */
-}
-
-
-
-        .auth-section { display: flex; gap: 12px; }
+        .auth-section {
+          display: flex;
+          gap: 12px;
+        }
         .auth-btn {
           padding: 10px 20px;
           border-radius: 8px;
@@ -148,103 +119,140 @@ const Navbar = () => {
         .register-btn { background: #2E8B57; color: white; }
         .register-btn:hover { background: #236B4E; }
 
-        .user-section-pro { display: flex; align-items: center; gap: 24px; font-size: 14.5px; }
-        .user-profile { display: flex; align-items: center; gap: 11px; }
+        .user-section-pro {
+          display: flex;
+          align-items: center;
+          gap: 24px;
+        }
         .user-avatar {
           width: 38px; height: 38px;
-          background: #2E8B57; color: white; font-weight: 600; font-size: 15px;
-          border-radius: 50%; display: flex; align-items: center; justify-content: center;
-          border: 2.5px solid rgba(46,139,87,0.25);
-          transition: all 0.2s ease;
+          background: #2E8B57; color: white; font-size: 15px;
+          border-radius: 50%;
+          display: flex;
+          align-items: center;
+          justify-content: center;
         }
-        .user-profile:hover .user-avatar {
-          background: #236B4E; border-color: rgba(46,139,87,0.4); transform: scale(1.05);
-        }
-        .user-name { font-weight: 500; color: #1F2937; }
 
         .logout-btn {
-          background: #111827; color: white; border: none;
-          padding: 10px 18px; border-radius: 10px; font-weight: 500;
-          font-size: 14px; cursor: pointer; transition: all 0.25s ease;
+          background: #111827;
+          color: white;
+          padding: 10px 16px;
+          border-radius: 8px;
+          font-size: 14px;
+          cursor: pointer;
+          border: none;
         }
-        .logout-btn:hover { background: #1F2937; transform: translateY(-1px); }
 
         .mobile-menu-btn {
-          display: none; flex-direction: column; gap: 4px;
-          background: none; border: none; padding: 8px; cursor: pointer;
+          display: none;
+          flex-direction: column;
+          gap: 4px;
+          background: none;
+          border: none;
+          padding: 8px;
+          cursor: pointer;
         }
-        .mobile-menu-btn span { width: 20px; height: 2px; background: #4B5563; transition: all 0.3s; }
-        .mobile-menu-btn.active span:nth-child(1) { transform: rotate(45deg) translate(5px,5px); }
-        .mobile-menu-btn.active span:nth-child(2) { opacity: 0; }
-        .mobile-menu-btn.active span:nth-child(3) { transform: rotate(-45deg) translate(5px,-5px); }
+        .mobile-menu-btn span {
+          width: 20px;
+          height: 2px;
+          background: #4B5563;
+          transition: all 0.3s;
+        }
+        .mobile-menu-btn.active span:nth-child(1) {
+          transform: rotate(45deg) translate(5px,5px);
+        }
+        .mobile-menu-btn.active span:nth-child(2) {
+          opacity: 0;
+        }
+        .mobile-menu-btn.active span:nth-child(3) {
+          transform: rotate(-45deg) translate(5px,-5px);
+        }
 
         @media (max-width: 968px) {
-          .nav-links { margin-left: 0 !important; gap: 12px; }
           .nav-main {
-            position: fixed; top: 72px; left: 0; width: 100%;
-            height: calc(100vh - 72px); background: rgba(255,255,255,0.98);
-            backdrop-filter: blur(20px); flex-direction: column;
-            padding: 40px 24px; gap: 32px; transform: translateX(-100%);
-            transition: transform 0.35s ease; border-top: 1px solid rgba(0,0,0,0.08);
+            position: fixed;
+            top: 72px;
+            left: 0;
+            width: 100%;
+            height: calc(100vh - 72px);
+            background: rgba(255,255,255,0.98);
+            backdrop-filter: blur(20px);
+            flex-direction: column;
+            justify-content: flex-start;
+            padding: 40px 24px;
+            transform: translateX(-100%);
+            transition: transform 0.3s ease-in-out;
           }
-          .nav-main.active { transform: translateX(0); }
-          .auth-section, .user-section-pro { flex-direction: column; width: 100%; gap: 16px; }
-          .auth-btn, .logout-btn { width: 100%; padding: 14px; text-align: center; }
-          .mobile-menu-btn { display: flex; }
+          .nav-main.active {
+            transform: translateX(0);
+          }
+          .nav-links {
+            flex-direction: column;
+            gap: 24px;
+            margin-right: 0;
+            align-items: center;
+          }
+          .auth-section,
+          .user-section-pro {
+            flex-direction: column;
+            width: 100%;
+          }
+          .auth-btn,
+          .logout-btn {
+            width: 100%;
+            text-align: center;
+          }
+          .mobile-menu-btn {
+            display: flex;
+          }
         }
       `}</style>
 
       <nav className="navbar">
         <div className="nav-container">
           <Link to="/" className="logo" onClick={closeMenu}>
-            EcoWaste
-            <span className="material-symbols-outlined" style={{ fontSize: "35px" }}>eco</span>
+            EcoWaste<span className="material-symbols-outlined" style={{ fontSize: "35px" }}>eco</span>
           </Link>
 
-          {/* FIX APPLIED: Button moved above menu */}
           <button className={`mobile-menu-btn ${isMenuOpen ? "active" : ""}`} onClick={toggleMenu}>
             <span></span><span></span><span></span>
           </button>
 
           <div className={`nav-main ${isMenuOpen ? "active" : ""}`}>
             <ul className="nav-links">
-              <li><Link to="/" onClick={closeMenu} className={location.pathname === '/' ? 'active' : ''}>Home</Link></li>
+              <li><Link to="/" className={location.pathname === "/" ? "active" : ""}>Home</Link></li>
 
               {user ? (
                 <>
-                  <li><Link to="/dashboard" onClick={closeMenu} className={location.pathname === '/dashboard' ? 'active' : ''}>Dashboard</Link></li>
-                  <li><Link to="/tracker" onClick={closeMenu} className={location.pathname === '/tracker' ? 'active' : ''}>Tracker</Link></li>
-                  <li><Link to="/tips" onClick={closeMenu} className={location.pathname === '/tips' ? 'active' : ''}>Tips</Link></li>
-                  <li><Link to="/schedule" onClick={closeMenu} className={location.pathname === '/schedule' ? 'active' : ''}>Schedule</Link></li>
-                  <li><Link to="/education" onClick={closeMenu} className={location.pathname === '/education' ? 'active' : ''}>Learn</Link></li>
+                  <li><Link to="/dashboard" className={location.pathname === "/dashboard" ? "active" : ""}>Dashboard</Link></li>
+                  <li><Link to="/tracker" className={location.pathname === "/tracker" ? "active" : ""}>Tracker</Link></li>
+                  <li><Link to="/tips" className={location.pathname === "/tips" ? "active" : ""}>Tips</Link></li>
+                  <li><Link to="/schedule" className={location.pathname === "/schedule" ? "active" : ""}>Schedule</Link></li>
+                  <li><Link to="/education" className={location.pathname === "/education" ? "active" : ""}>Learn</Link></li>
                 </>
               ) : (
                 <>
-                  <li><Link to="/education" onClick={closeMenu} className={location.pathname === '/education' ? 'active' : ''}>Learn</Link></li>
-                  <li><Link to="/about" onClick={closeMenu} className={location.pathname === '/about' ? 'active' : ''}>About</Link></li>
-                  <li><Link to="/contact" onClick={closeMenu} className={location.pathname === '/contact' ? 'active' : ''}>Contact</Link></li>
+                  <li><Link to="/education" className={location.pathname === "/education" ? "active" : ""}>Learn</Link></li>
+                  <li><Link to="/about" className={location.pathname === "/about" ? "active" : ""}>About</Link></li>
+                  <li><Link to="/contact" className={location.pathname === "/contact" ? "active" : ""}>Contact</Link></li>
                 </>
               )}
             </ul>
 
             {user ? (
               <div className="user-section-pro">
-                <div className="user-profile">
-                  <div className="user-avatar">
-                    {user.name ? user.name.charAt(0).toUpperCase() : 'U'}
-                  </div>
-                  <span className="user-name">{user.name || 'User'}</span>
+                <div className="user-avatar">
+                  {user.name ? user.name.charAt(0).toUpperCase() : "U"}
                 </div>
                 <button onClick={handleLogout} className="logout-btn">Logout</button>
               </div>
             ) : (
               <div className="auth-section">
-                <Link to="/login" className="auth-btn login-btn" onClick={closeMenu}>Login</Link>
-                <Link to="/register" className="auth-btn register-btn" onClick={closeMenu}>Register</Link>
+                <Link to="/login" className="auth-btn login-btn">Login</Link>
+                <Link to="/register" className="auth-btn register-btn">Register</Link>
               </div>
             )}
           </div>
-
         </div>
       </nav>
     </>

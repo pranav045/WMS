@@ -66,8 +66,8 @@ const Register = () => {
       localStorage.setItem('token', response.data.token);
       localStorage.setItem('user', JSON.stringify(response.data.user));
       API.defaults.headers.common['Authorization'] = `Bearer ${response.data.token}`;
+     navigate('/login'); // Best UX → After signup go to login
 
-      navigate('/dashboard');
     } catch (error) {
       setError(error.response?.data?.message || 'Registration failed. Please try again.');
     } finally {
