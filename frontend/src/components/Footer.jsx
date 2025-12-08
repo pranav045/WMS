@@ -30,12 +30,12 @@ const Footer = () => {
             <li>
               <Link to="/about">About Us</Link>
             </li>
-            <li>
+            {/* <li>
               <Link to="/tracker">Waste Tracker</Link>
-            </li>
-            <li>
+            </li> */}
+            {/* <li>
               <Link to="/tips">Recycling Tips</Link>
-            </li>
+            </li> */}
             <li>
               <Link to="/education">Educational Resources</Link>
             </li>
@@ -50,8 +50,8 @@ const Footer = () => {
           <ul>
             <li><Link to="/">Home</Link></li>
             <li><Link to="/about">About Us</Link></li>
-            <li><Link to="/tracker">Waste Tracker</Link></li>
-            <li><Link to="/tips">Recycling Tips</Link></li>
+    
+           
             <li><Link to="/education">Educational Resources</Link></li>
           </ul>
         </div> */}
