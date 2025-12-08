@@ -15,9 +15,14 @@ app.use(cors({
     "http://localhost:5173",
     "https://wmsd-one.vercel.app"
   ],
-  methods: "GET,POST,PUT,DELETE",
+  methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
+  allowedHeaders: ["Content-Type", "Authorization"],
   credentials: true
 }));
+
+// Handle preflight OPTIONS request for all routes
+app.options('*', cors());
+
 
 app.use(express.json());
 
