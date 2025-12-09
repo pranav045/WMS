@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from 'react';
 import { createUseStyles } from 'react-jss';
-
 // Create styles with JSS - Updated to match Home's color scheme (primary green #10b981, secondary blue #3b82f6, etc.)
 const useStyles = createUseStyles({
   '@global': {
@@ -263,6 +262,11 @@ const useStyles = createUseStyles({
     gap: '0.75rem',
     padding: '1rem 0',
     position: 'relative',
+    '@media (max-width: 768px)': {
+      height: '160px',
+      gap: '0.5rem',
+      padding: '0.5rem 0',
+    },
   },
   bar: {
     flex: 1,
@@ -270,9 +274,34 @@ const useStyles = createUseStyles({
     flexDirection: 'column',
     alignItems: 'center',
   },
-  barFill: {
+  barStack: {
+    display: 'flex',
+    flexDirection: 'column',
+    height: '150px',
+    justifyContent: 'flex-end',
     width: '100%',
-    borderRadius: '6px 6px 0 0',
+    '@media (max-width: 768px)': {
+      height: '130px',
+    },
+  },
+  barHazardous: {
+    height: 0,
+    backgroundColor: '#ef4444',
+    width: '100%',
+    borderRadius: '4px 4px 0 0',
+    transition: 'height 0.8s ease',
+  },
+  barRecyclable: {
+    height: 0,
+    backgroundColor: '#3b82f6',
+    width: '100%',
+    transition: 'height 0.8s ease',
+  },
+  barOrganic: {
+    height: 0,
+    backgroundColor: '#10b981',
+    width: '100%',
+    borderRadius: '0 0 4px 4px',
     transition: 'height 0.8s ease',
   },
   barLabel: {
@@ -280,6 +309,9 @@ const useStyles = createUseStyles({
     fontSize: '0.85rem',
     color: '#6b7280',
     fontWeight: 500,
+    '@media (max-width: 768px)': {
+      fontSize: '0.75rem',
+    },
   },
   pieChart: {
     display: 'flex',
@@ -385,9 +417,48 @@ const useStyles = createUseStyles({
     borderCollapse: 'collapse',
     marginTop: '1rem',
     '@media (max-width: 768px)': {
-      display: 'block',
-      overflowX: 'auto',
+      '& thead': {
+        display: 'none',
+      },
+      '& tbody tr': {
+        display: 'block',
+        marginBottom: '1.5rem',
+        backgroundColor: '#ffffff',
+        borderRadius: '12px',
+        boxShadow: '0 2px 4px rgba(0, 0, 0, 0.05)',
+        border: '1px solid #e5e7eb',
+        padding: '1rem',
+      },
+      '& tbody td': {
+        display: 'block',
+        textAlign: 'right',
+        padding: '0.75rem 1rem',
+        position: 'relative',
+        borderBottom: 'none',
+        '&:before': {
+          content: 'attr(data-label) : ',
+          position: 'absolute',
+          left: '0',
+          width: '40%',
+          fontWeight: '600',
+          color: '#6b7280',
+          textAlign: 'left',
+          paddingRight: '1rem',
+          whiteSpace: 'nowrap',
+          overflow: 'hidden',
+          textOverflow: 'ellipsis',
+        },
+        '&:last-child:before': {
+          display: 'none',
+        },
+      },
       fontSize: '14px',
+    },
+  },
+  tableContainer: {
+    overflowX: 'auto',
+    '@media (max-width: 768px)': {
+      overflowX: 'hidden',
     },
   },
   tableHeader: {
@@ -624,9 +695,6 @@ const useStyles = createUseStyles({
     color: '#6b7280',
     fontSize: '1rem',
   },
-  tableContainer: {
-    overflowX: 'auto',
-  },
   // Enhanced Pie Chart Container
   pieChartContainer: {
     position: 'relative',
@@ -659,7 +727,6 @@ const useStyles = createUseStyles({
     border: '2px solid #f3f4f6',
   },
 });
-
 // Data for the dashboard - Updated wasteComposition colors to match theme
 const initialData = {
   stats: {
@@ -745,60 +812,52 @@ const initialData = {
     emissionsPrevented: 12400,
   }
 };
-
-// Custom Bar Chart Component - Updated colors to match theme
-const BarChart = ({ data, colors }) => {
+// Custom Bar Chart Component - Updated to use JSS classes for responsive heights
+const BarChart = ({ data, colors, classes }) => {
   const maxValue = Math.max(...data.map(item =>
     item.organic + item.recyclable + item.hazardous
   ));
   return (
-    <div style={{ display: 'flex', alignItems: 'flex-end', height: '200px', gap: '5px', padding: '10px 0', '@media (max-width: 768px)': { height: '180px', gap: '3px' } }}>
+    <div className={classes.barChart}>
       {data.map((item, index) => {
         const total = item.organic + item.recyclable + item.hazardous;
         const organicHeight = (item.organic / maxValue) * 100;
         const recyclableHeight = (item.recyclable / maxValue) * 100;
         const hazardousHeight = (item.hazardous / maxValue) * 100;
-      
+     
         return (
-          <div key={index} style={{ flex: 1, display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
-            <div style={{ display: 'flex', flexDirection: 'column', height: '150px', justifyContent: 'flex-end', width: '100%', '@media (max-width: 768px)': { height: '130px' } }}>
+          <div key={index} className={classes.bar}>
+            <div className={classes.barStack}>
               <div
+                className={classes.barHazardous}
                 style={{
                   height: `${hazardousHeight}%`,
-                  backgroundColor: colors.hazardous,
-                  width: '100%',
-                  borderRadius: '4px 4px 0 0',
                 }}
               />
               <div
+                className={classes.barRecyclable}
                 style={{
                   height: `${recyclableHeight}%`,
-                  backgroundColor: colors.recyclable,
-                  width: '100%',
                 }}
               />
               <div
+                className={classes.barOrganic}
                 style={{
                   height: `${organicHeight}%`,
-                  backgroundColor: colors.organic,
-                  width: '100%',
-                  borderRadius: '0 0 4px 4px',
                 }}
               />
             </div>
-            <div style={{ marginTop: '8px', fontSize: '0.85rem', color: '#6b7280', '@media (max-width: 768px)': { fontSize: '0.75rem' } }}>{item.day}</div>
+            <div className={classes.barLabel}>{item.day}</div>
           </div>
         );
       })}
     </div>
   );
 };
-
 // Enhanced Custom Pie Chart Component with proper spacing
 const EnhancedPieChart = ({ data }) => {
   const total = data.reduce((sum, item) => sum + item.percentage, 0);
   let cumulativeAngle = 0;
- 
   // Create gradient effect for the chart
   const createGradient = (id, color) => {
     return (
@@ -817,26 +876,26 @@ const EnhancedPieChart = ({ data }) => {
           {createGradient('gradient-hazardous', '#ef4444')}
           {createGradient('gradient-other', '#8b5cf6')}
         </defs>
-       
+      
         {/* Outer circle with shadow */}
         <circle cx="110" cy="110" r="98" fill="none" stroke="#f3f4f6" strokeWidth="1" />
-       
+      
         {data.map((item, index) => {
           const angle = (item.percentage / total) * 360;
           const startAngle = cumulativeAngle;
           cumulativeAngle += angle;
-        
+       
           const startRad = (startAngle * Math.PI) / 180;
           const endRad = ((startAngle + angle) * Math.PI) / 180;
-        
+       
           const largeArc = angle > 180 ? 1 : 0;
-         
+        
           // Outer arc (main pie slice)
           const x1 = 110 + 98 * Math.cos(startRad);
           const y1 = 110 + 98 * Math.sin(startRad);
           const x2 = 110 + 98 * Math.cos(endRad);
           const y2 = 110 + 98 * Math.sin(endRad);
-         
+        
           // Inner arc (for donut effect)
           const innerRadius = 40;
           const x3 = 110 + innerRadius * Math.cos(endRad);
@@ -844,7 +903,7 @@ const EnhancedPieChart = ({ data }) => {
           const x4 = 110 + innerRadius * Math.cos(startRad);
           const y4 = 110 + innerRadius * Math.sin(startRad);
           const gradientId = `gradient-${item.type.toLowerCase()}`;
-         
+        
           return (
             <g key={index}>
               <path
@@ -858,7 +917,7 @@ const EnhancedPieChart = ({ data }) => {
                 strokeWidth="2"
                 style={{ transition: 'all 0.3s ease' }}
               />
-             
+            
               {/* Percentage label */}
               {angle > 10 && (
                 <text
@@ -878,7 +937,7 @@ const EnhancedPieChart = ({ data }) => {
           );
         })}
       </svg>
-     
+    
       {/* Center text */}
       <div style={{
         position: 'absolute',
@@ -907,7 +966,6 @@ const EnhancedPieChart = ({ data }) => {
     </div>
   );
 };
-
 // Alternative Pie Chart with better spacing
 const ModernPieChart = ({ data }) => {
   const total = data.reduce((sum, item) => sum + item.percentage, 0);
@@ -915,25 +973,23 @@ const ModernPieChart = ({ data }) => {
   const centerX = 110;
   const centerY = 110;
   const gap = 2; // Gap between slices in degrees
- 
   let cumulativeAngle = 0;
- 
   const slices = data.map((item, index) => {
     const angle = (item.percentage / total) * (360 - data.length * gap);
     const startAngle = cumulativeAngle + (index * gap);
     const endAngle = startAngle + angle;
     cumulativeAngle += angle;
-   
+  
     const startRad = (startAngle * Math.PI) / 180;
     const endRad = (endAngle * Math.PI) / 180;
-   
+  
     const x1 = centerX + radius * Math.cos(startRad);
     const y1 = centerY + radius * Math.sin(startRad);
     const x2 = centerX + radius * Math.cos(endRad);
     const y2 = centerY + radius * Math.sin(endRad);
-   
+  
     const largeArc = angle > 180 ? 1 : 0;
-   
+  
     return {
       path: `M ${centerX} ${centerY} L ${x1} ${y1} A ${radius} ${radius} 0 ${largeArc} 1 ${x2} ${y2} Z`,
       color: item.color,
@@ -950,10 +1006,10 @@ const ModernPieChart = ({ data }) => {
             <feDropShadow dx="0" dy="0" stdDeviation="3" floodColor="rgba(0,0,0,0.1)" />
           </filter>
         </defs>
-       
+      
         {/* Background circle */}
         <circle cx="110" cy="110" r="95" fill="#f9fafb" stroke="#e5e7eb" strokeWidth="1" />
-       
+      
         {slices.map((slice, index) => (
           <g key={index} filter="url(#shadow)">
             <path
@@ -970,7 +1026,7 @@ const ModernPieChart = ({ data }) => {
                 e.currentTarget.style.transform = 'scale(1)';
               }}
             />
-           
+          
             {/* Percentage label */}
             {slice.percentage > 8 && (
               <text
@@ -988,11 +1044,11 @@ const ModernPieChart = ({ data }) => {
             )}
           </g>
         ))}
-       
+      
         {/* Center circle */}
         <circle cx="110" cy="110" r="40" fill="white" stroke="#f3f4f6" strokeWidth="2" />
       </svg>
-     
+    
       {/* Center text */}
       <div style={{
         position: 'absolute',
@@ -1019,7 +1075,6 @@ const ModernPieChart = ({ data }) => {
     </div>
   );
 };
-
 const Dashboard = () => {
   const classes = useStyles();
   const [data, setData] = useState(initialData);
@@ -1032,34 +1087,31 @@ const Dashboard = () => {
     desc: 'Eastside zone projected to reach 90% capacity in 4 hours. Preemptive dispatch recommended.'
   });
   const [pieChartType, setPieChartType] = useState('modern'); // 'modern' or 'enhanced'
-
   // Add viewport meta tag dynamically for mobile zoom fix
   useEffect(() => {
     // Set viewport meta tag to prevent mobile zoom issues
     const setViewportMeta = () => {
       let viewportMeta = document.querySelector('meta[name="viewport"]');
-      
+     
       if (!viewportMeta) {
         viewportMeta = document.createElement('meta');
         viewportMeta.name = 'viewport';
         document.head.appendChild(viewportMeta);
       }
-      
-      // Prevent initial zoom on mobile
+     
+      // Prevent initial zoom on mobile, but allow user scaling if needed
       viewportMeta.content = 'width=device-width, initial-scale=1, maximum-scale=5, user-scalable=yes, shrink-to-fit=no';
     };
-
     setViewportMeta();
-    
+   
     // Also add touch-action to prevent pull-to-refresh on mobile
     document.body.style.touchAction = 'pan-x pan-y';
-    
+   
     return () => {
       // Cleanup if needed
       document.body.style.touchAction = '';
     };
   }, []);
-
   // Simulate real-time updates
   useEffect(() => {
     const interval = setInterval(() => {
@@ -1072,7 +1124,7 @@ const Dashboard = () => {
         }
       }));
     }, 5000);
-   
+  
     // Dynamic alert updates - future-oriented
     const alertInterval = setInterval(() => {
       const futureAlerts = [
@@ -1084,7 +1136,7 @@ const Dashboard = () => {
       const randomAlert = futureAlerts[Math.floor(Math.random() * futureAlerts.length)];
       setAlertMessage(randomAlert);
     }, 30000); // Update every 30 seconds for dynamic feel
-   
+  
     // Running time update
     const timeInterval = setInterval(() => {
       const now = new Date();
@@ -1096,24 +1148,21 @@ const Dashboard = () => {
       });
       setCurrentTime(timeString);
     }, 1000);
-   
+  
     return () => {
       clearInterval(interval);
       clearInterval(alertInterval);
       clearInterval(timeInterval);
     };
   }, []);
-
   const handleZoneClick = (zoneId) => {
     setSelectedZone(zoneId);
     // In a real app, this would navigate to zone details or show a modal
     console.log(`Zone ${zoneId} selected`);
   };
-
   const handleAlertDismiss = () => {
     setAlertVisible(false);
   };
-
   const handleTimeFilter = (filter) => {
     setTimeFilter(filter);
     // Make some difference: Switch chart data based on filter
@@ -1171,19 +1220,16 @@ const Dashboard = () => {
     // In a real app, this would fetch new data based on the filter
     console.log(`Time filter changed to: ${filter}`);
   };
-
   const formatNumber = (num) => {
     if (num >= 1000000) return `${(num / 1000000).toFixed(1)}M`;
     if (num >= 1000) return `${(num / 1000).toFixed(1)}K`;
     return num.toString();
   };
-
   const getFillLevelColor = (level) => {
     if (level >= 80) return '#ef4444';
     if (level >= 60) return '#f59e0b';
     return '#10b981';
   };
-
   const getPriorityColor = (priority) => {
     switch(priority) {
       case 'High': return '#ef4444';
@@ -1192,9 +1238,7 @@ const Dashboard = () => {
       default: return '#6b7280';
     }
   };
-
   const chartData = data.weeklyData; // Use the updated data from filter
-
   return (
     <div className={classes.dashboard}>
       {/* Top Bar */}
@@ -1202,8 +1246,8 @@ const Dashboard = () => {
         <div className={classes.logoSection}>
           <div className={classes.logoIcon}>♻️</div>
           <div>
-            <h1 style={{ margin: 0, fontSize: '1.5rem', color: '#10b981', '@media (max-width: 768px)': { fontSize: '1.25rem' } }}>Eco Impact Overview</h1>
-           
+            <h1 style={{ margin: 0, fontSize: '1.5rem', color: '#10b981' }}>Eco Impact Overview</h1>
+          
           </div>
         </div>
         <div className={classes.dateSection}>
@@ -1322,6 +1366,7 @@ const Dashboard = () => {
             <BarChart
               data={chartData}
               colors={{ organic: '#10b981', recyclable: '#3b82f6', hazardous: '#ef4444' }}
+              classes={classes}
             />
             <div style={{ display: 'flex', justifyContent: 'center', gap: '1.5rem', marginTop: '1rem', flexWrap: 'wrap' }}>
               <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
@@ -1358,13 +1403,13 @@ const Dashboard = () => {
                 </button>
               </div>
             </div>
-           
+          
             {pieChartType === 'modern' ? (
               <ModernPieChart data={data.wasteComposition} />
             ) : (
               <EnhancedPieChart data={data.wasteComposition} />
             )}
-           
+          
             <div className={classes.pieLegend}>
               {data.wasteComposition.map((item, index) => (
                 <div key={index} className={classes.legendItem} style={{ color: '#374151' }}>
@@ -1397,8 +1442,8 @@ const Dashboard = () => {
                     onClick={() => handleZoneClick(zone.id)}
                     style={{ cursor: 'pointer' }}
                   >
-                    <td style={{ fontWeight: 600 }}>{zone.zone}</td>
-                    <td>
+                    <td data-label="Zone" style={{ fontWeight: 600 }}>{zone.zone}</td>
+                    <td data-label="Status">
                       <span className={`${classes.statusBadge} ${zone.status}`}>
                         {zone.status === 'active' && '🟢'}
                         {zone.status === 'maintenance' && '🟡'}
@@ -1406,7 +1451,7 @@ const Dashboard = () => {
                         {zone.status.charAt(0).toUpperCase() + zone.status.slice(1)}
                       </span>
                     </td>
-                    <td>
+                    <td data-label="Fill Level">
                       <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
                         <div className={classes.progressBar}>
                           <div
@@ -1420,7 +1465,7 @@ const Dashboard = () => {
                         <span style={{ fontWeight: 600 }}>{zone.fillLevel}%</span>
                       </div>
                     </td>
-                    <td>
+                    <td data-label="Priority">
                       <span style={{
                         padding: '0.25rem 0.75rem',
                         borderRadius: '12px',
@@ -1432,7 +1477,7 @@ const Dashboard = () => {
                         {zone.priority}
                       </span>
                     </td>
-                    <td>{zone.nextCollection}</td>
+                    <td data-label="Next Collection">{zone.nextCollection}</td>
                   </tr>
                 ))}
               </tbody>
@@ -1476,19 +1521,19 @@ const Dashboard = () => {
               <div className={classes.impactValue}>{formatNumber(data.environmentalImpact.treesSaved)}</div>
               <div className={classes.impactLabel}>Trees Equivalent Saved</div>
             </div>
-          
+         
             <div className={classes.impactCard}>
               <div className={classes.impactIcon}>💧</div>
               <div className={classes.impactValue}>{formatNumber(data.environmentalImpact.waterSaved)} L</div>
               <div className={classes.impactLabel}>Water Conserved</div>
             </div>
-          
+         
             <div className={classes.impactCard}>
               <div className={classes.impactIcon}>⚡</div>
               <div className={classes.impactValue}>{formatNumber(data.environmentalImpact.energySaved)} kWh</div>
               <div className={classes.impactLabel}>Energy Generated</div>
             </div>
-          
+         
             <div className={classes.impactCard}>
               <div className={classes.impactIcon}>☁️</div>
               <div className={classes.impactValue}>{formatNumber(data.environmentalImpact.emissionsPrevented)} tons</div>
@@ -1500,5 +1545,4 @@ const Dashboard = () => {
     </div>
   );
 };
-
 export default Dashboard;
