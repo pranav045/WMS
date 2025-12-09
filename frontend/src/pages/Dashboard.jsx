@@ -29,7 +29,6 @@ const useStyles = createUseStyles({
     padding: 0,
     boxSizing: 'border-box',
     overflowX: 'hidden',
-    maxWidth: '1400px',
     width: '100%',
     '-webkit-overflow-scrolling': 'touch',
     'overflow-scrolling': 'touch',
@@ -83,11 +82,11 @@ const useStyles = createUseStyles({
   },
   container: {
     padding: '2rem',
-    maxWidth: '1400px',
-    margin: '0 auto',
     width: '100%',
+    margin: '0 auto',
     '@media (max-width: 768px)': {
       padding: '0.5rem',
+      width: '100%',
     },
   },
   alertSection: {
