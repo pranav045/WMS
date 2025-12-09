@@ -74,7 +74,6 @@ const EducationalResources = () => {
       topics: ["Brands", "Materials", "Trends"]
     },
   ];
-
   const articles = [
     {
       id: 1,
@@ -131,7 +130,6 @@ const EducationalResources = () => {
       image: "https://images.unsplash.com/photo-1576092768241-dec231879fc3?w=800&q=80"
     }
   ];
-
   const simpleSteps = [
     {
       id: 1,
@@ -182,7 +180,6 @@ const EducationalResources = () => {
       color: "#06B6D4"
     }
   ];
-
   const visualGlossary = [
     {
       id: 1,
@@ -227,15 +224,16 @@ const EducationalResources = () => {
       color: "#06B6D4"
     }
   ];
-
   return (
-    <div style={{ 
+    <div style={{
       minHeight: '100vh',
       background: 'linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%)',
       padding: '1rem',
       fontFamily: '"Inter", system-ui, -apple-system, sans-serif',
       lineHeight: 1.5,
-      color: '#333'
+      color: '#333',
+      maxWidth: '1200px',
+      margin: '0 auto'
     }}>
       <style jsx global>{`
         :root {
@@ -262,9 +260,7 @@ const EducationalResources = () => {
         @keyframes fadeInUp { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
         .fade-in { animation: fadeInUp 0.4s ease-out forwards; }
       `}</style>
-
   
-
       {/* Quick Start Guides */}
       <section style={{ marginBottom: '2rem' }} className="fade-in">
         <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '1rem' }}>
@@ -274,7 +270,6 @@ const EducationalResources = () => {
           }}>Quick Start Guides</h2>
           <span style={{ color: 'var(--text-light)', fontSize: '0.8rem' }}>Visual & Audio</span>
         </div>
-
         <div className="resource-grid">
           {resources.map((resource, index) => (
             <a
@@ -284,9 +279,9 @@ const EducationalResources = () => {
               rel="noopener noreferrer"
               style={{ textDecoration: 'none', color: 'inherit' }}
             >
-              <div 
+              <div
                 className="card-hover"
-                style={{ 
+                style={{
                   borderRadius: '12px',
                   background: 'white',
                   overflow: 'hidden',
@@ -304,7 +299,6 @@ const EducationalResources = () => {
                     {resource.icon}
                   </div>
                 </div>
-
                 <div style={{ padding: '0.75rem', flex: 1, display: 'flex', flexDirection: 'column' }}>
                   <div style={{ display: 'flex', flexWrap: 'wrap', gap: '0.125rem', marginBottom: '0.5rem' }}>
                     <span className="tag tag-type">{resource.type}</span>
@@ -330,7 +324,6 @@ const EducationalResources = () => {
           ))}
         </div>
       </section>
-
       {/* Inspiring Reads */}
       <section style={{ marginBottom: '2rem' }} className="fade-in">
         <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '1rem' }}>
@@ -340,7 +333,6 @@ const EducationalResources = () => {
           }}>Inspiring Reads</h2>
           <span style={{ color: 'var(--text-light)', fontSize: '0.8rem' }}>Short Stories</span>
         </div>
-
         <div className="article-grid">
           {articles.map((article, index) => (
             <a
@@ -382,7 +374,6 @@ const EducationalResources = () => {
           ))}
         </div>
       </section>
-
       {/* Easy Steps */}
       <section style={{ marginBottom: '2rem' }} className="fade-in">
         <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '1rem' }}>
@@ -392,7 +383,6 @@ const EducationalResources = () => {
           }}>Easy Steps</h2>
           <span style={{ color: 'var(--text-light)', fontSize: '0.8rem' }}>Beginner Friendly</span>
         </div>
-
         <div className="steps-grid">
           {simpleSteps.map((step, index) => (
             <div
@@ -408,13 +398,13 @@ const EducationalResources = () => {
               }}
             >
               <div style={{ display: 'flex', alignItems: 'flex-start', gap: '0.75rem' }}>
-                <div style={{ 
-                  width: '40px', 
-                  height: '40px', 
-                  borderRadius: '8px', 
+                <div style={{
+                  width: '40px',
+                  height: '40px',
+                  borderRadius: '8px',
                   background: step.color + '20',
-                  display: 'flex', 
-                  alignItems: 'center', 
+                  display: 'flex',
+                  alignItems: 'center',
                   justifyContent: 'center',
                   fontSize: '1.2rem'
                 }}>
@@ -422,9 +412,9 @@ const EducationalResources = () => {
                 </div>
                 <div>
                   <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', marginBottom: '0.25rem' }}>
-                    <span style={{ 
-                      fontSize: '0.875rem', 
-                      fontWeight: 600, 
+                    <span style={{
+                      fontSize: '0.875rem',
+                      fontWeight: 600,
                       color: step.color,
                       background: step.color + '20',
                       padding: '0.125rem 0.5rem',
@@ -436,9 +426,9 @@ const EducationalResources = () => {
                       {step.title}
                     </h4>
                   </div>
-                  <p style={{ 
-                    margin: 0, 
-                    color: 'var(--text-light)', 
+                  <p style={{
+                    margin: 0,
+                    color: 'var(--text-light)',
                     fontSize: '0.85rem',
                     lineHeight: 1.4
                   }}>
