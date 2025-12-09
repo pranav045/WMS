@@ -8,10 +8,11 @@ const useStyles = createUseStyles({
     backgroundColor: '#f9fafb',
     color: '#374151',
     minHeight: '100vh',
-    margin: 0,
+    margin: '0 auto',
     padding: 0,
     boxSizing: 'border-box',
     overflowX: 'hidden',
+    maxWidth: '1400px',
   },
   topBar: {
     display: 'flex',

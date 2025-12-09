@@ -61,7 +61,7 @@ const Home = () => {
   };
 
   return (
-    <div className="w-full">
+    <div className="w-full" style={{ maxWidth: '1200px', margin: '0 auto' }}>
       {/* Hero Section */}
       <section className="hero">
         <div className="hero-content">
