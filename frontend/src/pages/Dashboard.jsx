@@ -1,7 +1,25 @@
 import React, { useState, useEffect } from 'react';
 import { createUseStyles } from 'react-jss';
+
 // Create styles with JSS - Updated to match Home's color scheme (primary green #10b981, secondary blue #3b82f6, etc.)
 const useStyles = createUseStyles({
+  '@global': {
+    html: {
+      '-webkit-text-size-adjust': '100%',
+      '-ms-text-size-adjust': '100%',
+      'text-size-adjust': '100%',
+      'touch-action': 'manipulation',
+    },
+    body: {
+      'touch-action': 'pan-x pan-y',
+      '-webkit-font-smoothing': 'antialiased',
+      '-moz-osx-font-smoothing': 'grayscale',
+      'overscroll-behavior': 'none',
+    },
+    '*': {
+      '-webkit-tap-highlight-color': 'transparent',
+    },
+  },
   dashboard: {
     fontFamily: "'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif",
     backgroundColor: '#f9fafb',
@@ -13,6 +31,8 @@ const useStyles = createUseStyles({
     overflowX: 'hidden',
     maxWidth: '1400px',
     width: '100%',
+    '-webkit-overflow-scrolling': 'touch',
+    'overflow-scrolling': 'touch',
   },
   topBar: {
     display: 'flex',
@@ -640,6 +660,7 @@ const useStyles = createUseStyles({
     border: '2px solid #f3f4f6',
   },
 });
+
 // Data for the dashboard - Updated wasteComposition colors to match theme
 const initialData = {
   stats: {
@@ -725,6 +746,7 @@ const initialData = {
     emissionsPrevented: 12400,
   }
 };
+
 // Custom Bar Chart Component - Updated colors to match theme
 const BarChart = ({ data, colors }) => {
   const maxValue = Math.max(...data.map(item =>
@@ -772,6 +794,7 @@ const BarChart = ({ data, colors }) => {
     </div>
   );
 };
+
 // Enhanced Custom Pie Chart Component with proper spacing
 const EnhancedPieChart = ({ data }) => {
   const total = data.reduce((sum, item) => sum + item.percentage, 0);
@@ -885,6 +908,7 @@ const EnhancedPieChart = ({ data }) => {
     </div>
   );
 };
+
 // Alternative Pie Chart with better spacing
 const ModernPieChart = ({ data }) => {
   const total = data.reduce((sum, item) => sum + item.percentage, 0);
@@ -996,6 +1020,7 @@ const ModernPieChart = ({ data }) => {
     </div>
   );
 };
+
 const Dashboard = () => {
   const classes = useStyles();
   const [data, setData] = useState(initialData);
@@ -1008,6 +1033,34 @@ const Dashboard = () => {
     desc: 'Eastside zone projected to reach 90% capacity in 4 hours. Preemptive dispatch recommended.'
   });
   const [pieChartType, setPieChartType] = useState('modern'); // 'modern' or 'enhanced'
+
+  // Add viewport meta tag dynamically for mobile zoom fix
+  useEffect(() => {
+    // Set viewport meta tag to prevent mobile zoom issues
+    const setViewportMeta = () => {
+      let viewportMeta = document.querySelector('meta[name="viewport"]');
+      
+      if (!viewportMeta) {
+        viewportMeta = document.createElement('meta');
+        viewportMeta.name = 'viewport';
+        document.head.appendChild(viewportMeta);
+      }
+      
+      // Prevent initial zoom on mobile
+      viewportMeta.content = 'width=device-width, initial-scale=1, maximum-scale=5, user-scalable=yes, shrink-to-fit=no';
+    };
+
+    setViewportMeta();
+    
+    // Also add touch-action to prevent pull-to-refresh on mobile
+    document.body.style.touchAction = 'pan-x pan-y';
+    
+    return () => {
+      // Cleanup if needed
+      document.body.style.touchAction = '';
+    };
+  }, []);
+
   // Simulate real-time updates
   useEffect(() => {
     const interval = setInterval(() => {
@@ -1051,14 +1104,17 @@ const Dashboard = () => {
       clearInterval(timeInterval);
     };
   }, []);
+
   const handleZoneClick = (zoneId) => {
     setSelectedZone(zoneId);
     // In a real app, this would navigate to zone details or show a modal
     console.log(`Zone ${zoneId} selected`);
   };
+
   const handleAlertDismiss = () => {
     setAlertVisible(false);
   };
+
   const handleTimeFilter = (filter) => {
     setTimeFilter(filter);
     // Make some difference: Switch chart data based on filter
@@ -1116,16 +1172,19 @@ const Dashboard = () => {
     // In a real app, this would fetch new data based on the filter
     console.log(`Time filter changed to: ${filter}`);
   };
+
   const formatNumber = (num) => {
     if (num >= 1000000) return `${(num / 1000000).toFixed(1)}M`;
     if (num >= 1000) return `${(num / 1000).toFixed(1)}K`;
     return num.toString();
   };
+
   const getFillLevelColor = (level) => {
     if (level >= 80) return '#ef4444';
     if (level >= 60) return '#f59e0b';
     return '#10b981';
   };
+
   const getPriorityColor = (priority) => {
     switch(priority) {
       case 'High': return '#ef4444';
@@ -1134,7 +1193,9 @@ const Dashboard = () => {
       default: return '#6b7280';
     }
   };
+
   const chartData = data.weeklyData; // Use the updated data from filter
+
   return (
     <div className={classes.dashboard}>
       {/* Top Bar */}
@@ -1440,4 +1501,5 @@ const Dashboard = () => {
     </div>
   );
 };
+
 export default Dashboard;
