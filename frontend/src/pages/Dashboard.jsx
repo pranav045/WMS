@@ -117,7 +117,7 @@ const useStyles = createUseStyles({
     },
     '@media (max-width: 768px)': {
       padding: '0.875rem 1.75rem',
-      fontSize: '1rem',
+      fontSize: '16px',
       minHeight: '44px',
     },
   },
@@ -472,7 +472,7 @@ const useStyles = createUseStyles({
     },
     '@media (max-width: 768px)': {
       padding: '0.75rem 1.25rem',
-      fontSize: '1rem',
+      fontSize: '16px',
       minHeight: '44px',
     },
   },
@@ -1188,14 +1188,14 @@ const Dashboard = () => {
                 <button
                   className={`${classes.filterButton} ${pieChartType === 'modern' ? 'active' : ''}`}
                   onClick={() => setPieChartType('modern')}
-                  style={{ padding: '0.3rem 0.7rem', fontSize: '0.8rem' }}
+                  style={{ padding: '0.3rem 0.7rem', fontSize: '16px' }}
                 >
                   Modern
                 </button>
                 <button
                   className={`${classes.filterButton} ${pieChartType === 'enhanced' ? 'active' : ''}`}
                   onClick={() => setPieChartType('enhanced')}
-                  style={{ padding: '0.3rem 0.7rem', fontSize: '0.8rem' }}
+                  style={{ padding: '0.3rem 0.7rem', fontSize: '16px' }}
                 >
                   Enhanced
                 </button>
