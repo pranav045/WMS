@@ -12,6 +12,7 @@ const useStyles = createUseStyles({
     boxSizing: 'border-box',
     overflowX: 'hidden',
     maxWidth: '1400px',
+    width: '100%',
   },
   topBar: {
     display: 'flex',
@@ -27,7 +28,7 @@ const useStyles = createUseStyles({
     '@media (max-width: 768px)': {
       flexDirection: 'column',
       gap: '1rem',
-      padding: '1rem',
+      padding: '0.75rem 1rem',
     },
   },
   logoSection: {
@@ -43,6 +44,9 @@ const useStyles = createUseStyles({
     background: 'linear-gradient(135deg, #10b981, #3b82f6)',
     WebkitBackgroundClip: 'text',
     WebkitTextFillColor: 'transparent',
+    '@media (max-width: 768px)': {
+      fontSize: '2rem',
+    },
   },
   '@keyframes rotate': {
     'from': { transform: 'rotate(0deg)' },
@@ -61,8 +65,9 @@ const useStyles = createUseStyles({
     padding: '2rem',
     maxWidth: '1400px',
     margin: '0 auto',
+    width: '100%',
     '@media (max-width: 768px)': {
-      padding: '1rem',
+      padding: '0.5rem',
     },
   },
   alertSection: {
@@ -79,6 +84,7 @@ const useStyles = createUseStyles({
       flexDirection: 'column',
       textAlign: 'center',
       padding: '1rem',
+      marginBottom: '1rem',
     },
   },
   '@keyframes pulse': {
@@ -119,6 +125,7 @@ const useStyles = createUseStyles({
       padding: '0.875rem 1.75rem',
       fontSize: '16px',
       minHeight: '44px',
+      width: '100%',
     },
   },
   mainGrid: {
@@ -128,6 +135,7 @@ const useStyles = createUseStyles({
     marginBottom: '2rem',
     '@media (max-width: 768px)': {
       gridTemplateColumns: '1fr',
+      gap: '1rem',
     },
   },
   statCard: {
@@ -140,6 +148,9 @@ const useStyles = createUseStyles({
     '&:hover': {
       transform: 'translateY(-5px)',
       boxShadow: '0 8px 20px rgba(0, 0, 0, 0.15)',
+    },
+    '@media (max-width: 768px)': {
+      padding: '1rem',
     },
   },
   statHeader: {
@@ -156,6 +167,11 @@ const useStyles = createUseStyles({
     alignItems: 'center',
     justifyContent: 'center',
     fontSize: '1.5rem',
+    '@media (max-width: 768px)': {
+      width: '40px',
+      height: '40px',
+      fontSize: '1.25rem',
+    },
   },
   statTitle: {
     fontSize: '0.95rem',
@@ -168,6 +184,9 @@ const useStyles = createUseStyles({
     fontWeight: 800,
     margin: '0.5rem 0',
     color: '#10b981',
+    '@media (max-width: 768px)': {
+      fontSize: '1.8rem',
+    },
   },
   statTrend: {
     display: 'inline-flex',
@@ -193,6 +212,7 @@ const useStyles = createUseStyles({
     marginBottom: '2rem',
     '@media (max-width: 768px)': {
       gridTemplateColumns: '1fr',
+      gap: '1rem',
     },
   },
   chartCard: {
@@ -201,6 +221,9 @@ const useStyles = createUseStyles({
     padding: '1.5rem',
     boxShadow: '0 2px 4px rgba(0, 0, 0, 0.1)',
     border: '1px solid #e5e7eb',
+    '@media (max-width: 768px)': {
+      padding: '1rem',
+    },
   },
   chartTitle: {
     fontSize: '1.2rem',
@@ -210,6 +233,9 @@ const useStyles = createUseStyles({
     display: 'flex',
     alignItems: 'center',
     gap: '0.5rem',
+    '@media (max-width: 768px)': {
+      fontSize: '1rem',
+    },
   },
   barChart: {
     display: 'flex',
@@ -251,12 +277,20 @@ const useStyles = createUseStyles({
     gap: '1rem',
     justifyContent: 'center',
     marginTop: '1rem',
+    '@media (max-width: 768px)': {
+      flexDirection: 'column',
+      alignItems: 'center',
+      gap: '0.5rem',
+    },
   },
   legendItem: {
     display: 'flex',
     alignItems: 'center',
     gap: '0.5rem',
     fontSize: '0.9rem',
+    '@media (max-width: 768px)': {
+      fontSize: '0.85rem',
+    },
   },
   legendColor: {
     width: '12px',
@@ -270,6 +304,10 @@ const useStyles = createUseStyles({
     boxShadow: '0 2px 4px rgba(0, 0, 0, 0.1)',
     border: '1px solid #e5e7eb',
     marginBottom: '2rem',
+    '@media (max-width: 768px)': {
+      padding: '1rem',
+      marginBottom: '1rem',
+    },
   },
   processGrid: {
     display: 'grid',
@@ -318,6 +356,10 @@ const useStyles = createUseStyles({
     boxShadow: '0 2px 4px rgba(0, 0, 0, 0.1)',
     border: '1px solid #e5e7eb',
     marginBottom: '2rem',
+    '@media (max-width: 768px)': {
+      padding: '1rem',
+      marginBottom: '1rem',
+    },
   },
   zonesTable: {
     width: '100%',
@@ -326,6 +368,7 @@ const useStyles = createUseStyles({
     '@media (max-width: 768px)': {
       display: 'block',
       overflowX: 'auto',
+      fontSize: '14px',
     },
   },
   tableHeader: {
@@ -337,6 +380,10 @@ const useStyles = createUseStyles({
       color: '#374151',
       borderBottom: '2px solid #e5e7eb',
       fontSize: '0.9rem',
+      '@media (max-width: 768px)': {
+        padding: '0.75rem',
+        fontSize: '0.85rem',
+      },
     },
   },
   tableRow: {
@@ -351,6 +398,10 @@ const useStyles = createUseStyles({
       borderBottom: '1px solid #e5e7eb',
       fontSize: '0.9rem',
       color: '#374151',
+      '@media (max-width: 768px)': {
+        padding: '0.75rem',
+        fontSize: '0.85rem',
+      },
     },
   },
   statusBadge: {
@@ -382,6 +433,9 @@ const useStyles = createUseStyles({
     overflow: 'hidden',
     display: 'inline-block',
     marginRight: '0.5rem',
+    '@media (max-width: 768px)': {
+      width: '60px',
+    },
   },
   progressFill: {
     height: '100%',
@@ -391,6 +445,10 @@ const useStyles = createUseStyles({
     display: 'grid',
     gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))',
     gap: '1.5rem',
+    '@media (max-width: 768px)': {
+      gridTemplateColumns: '1fr',
+      gap: '1rem',
+    },
   },
   initiativeCard: {
     backgroundColor: '#ffffff',
@@ -403,12 +461,20 @@ const useStyles = createUseStyles({
       transform: 'translateY(-5px)',
       boxShadow: '0 8px 20px rgba(0, 0, 0, 0.15)',
     },
+    '@media (max-width: 768px)': {
+      padding: '1rem',
+    },
   },
   initiativeHeader: {
     display: 'flex',
     alignItems: 'center',
     gap: '1rem',
     marginBottom: '1rem',
+    '@media (max-width: 768px)': {
+      flexDirection: 'column',
+      alignItems: 'flex-start',
+      gap: '0.5rem',
+    },
   },
   initiativeIcon: {
     fontSize: '2rem',
@@ -418,12 +484,18 @@ const useStyles = createUseStyles({
     fontWeight: 700,
     color: '#10b981',
     margin: 0,
+    '@media (max-width: 768px)': {
+      fontSize: '1rem',
+    },
   },
   initiativeDesc: {
     color: '#6b7280',
     fontSize: '0.95rem',
     lineHeight: 1.6,
     marginBottom: '1rem',
+    '@media (max-width: 768px)': {
+      fontSize: '0.9rem',
+    },
   },
   initiativeProgress: {
     height: '8px',
@@ -442,12 +514,21 @@ const useStyles = createUseStyles({
     justifyContent: 'space-between',
     fontSize: '0.9rem',
     color: '#6b7280',
+    '@media (max-width: 768px)': {
+      flexDirection: 'column',
+      gap: '0.25rem',
+      fontSize: '0.85rem',
+    },
   },
   timeFilter: {
     display: 'flex',
     gap: '0.5rem',
     marginBottom: '1rem',
     flexWrap: 'wrap',
+    justifyContent: 'center',
+    '@media (max-width: 768px)': {
+      gap: '0.25rem',
+    },
   },
   filterButton: {
     padding: '0.5rem 1rem',
@@ -471,9 +552,11 @@ const useStyles = createUseStyles({
       borderColor: '#10b981',
     },
     '@media (max-width: 768px)': {
-      padding: '0.75rem 1.25rem',
+      padding: '0.75rem 1rem',
       fontSize: '16px',
       minHeight: '44px',
+      flex: '1 1 auto',
+      minWidth: '80px',
     },
   },
   impactGrid: {
@@ -481,12 +564,19 @@ const useStyles = createUseStyles({
     gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))',
     gap: '1.5rem',
     marginTop: '1.5rem',
+    '@media (max-width: 768px)': {
+      gridTemplateColumns: 'repeat(2, 1fr)',
+      gap: '1rem',
+    },
   },
   impactCard: {
     textAlign: 'center',
     padding: '1.5rem',
     borderRadius: '12px',
     backgroundColor: '#f9fafb',
+    '@media (max-width: 768px)': {
+      padding: '1rem',
+    },
   },
   impactIcon: {
     fontSize: '2rem',
@@ -497,11 +587,17 @@ const useStyles = createUseStyles({
     fontWeight: 800,
     color: '#10b981',
     margin: '0.5rem 0',
+    '@media (max-width: 768px)': {
+      fontSize: '1.5rem',
+    },
   },
   impactLabel: {
     fontSize: '0.9rem',
     color: '#6b7280',
     fontWeight: 500,
+    '@media (max-width: 768px)': {
+      fontSize: '0.8rem',
+    },
   },
   noData: {
     textAlign: 'center',
@@ -515,8 +611,9 @@ const useStyles = createUseStyles({
   // Enhanced Pie Chart Container
   pieChartContainer: {
     position: 'relative',
-    width: '220px',
-    height: '220px',
+    width: '100%',
+    maxWidth: '220px',
+    height: 'auto',
     margin: '0 auto',
   },
   pieChartSvg: {
@@ -634,7 +731,7 @@ const BarChart = ({ data, colors }) => {
     item.organic + item.recyclable + item.hazardous
   ));
   return (
-    <div style={{ display: 'flex', alignItems: 'flex-end', height: '200px', gap: '10px', padding: '10px 0' }}>
+    <div style={{ display: 'flex', alignItems: 'flex-end', height: '200px', gap: '5px', padding: '10px 0', '@media (max-width: 768px)': { height: '180px', gap: '3px' } }}>
       {data.map((item, index) => {
         const total = item.organic + item.recyclable + item.hazardous;
         const organicHeight = (item.organic / maxValue) * 100;
@@ -643,7 +740,7 @@ const BarChart = ({ data, colors }) => {
       
         return (
           <div key={index} style={{ flex: 1, display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
-            <div style={{ display: 'flex', flexDirection: 'column', height: '150px', justifyContent: 'flex-end', width: '100%' }}>
+            <div style={{ display: 'flex', flexDirection: 'column', height: '150px', justifyContent: 'flex-end', width: '100%', '@media (max-width: 768px)': { height: '130px' } }}>
               <div
                 style={{
                   height: `${hazardousHeight}%`,
@@ -668,7 +765,7 @@ const BarChart = ({ data, colors }) => {
                 }}
               />
             </div>
-            <div style={{ marginTop: '8px', fontSize: '0.85rem', color: '#6b7280' }}>{item.day}</div>
+            <div style={{ marginTop: '8px', fontSize: '0.85rem', color: '#6b7280', '@media (max-width: 768px)': { fontSize: '0.75rem' } }}>{item.day}</div>
           </div>
         );
       })}
@@ -690,8 +787,8 @@ const EnhancedPieChart = ({ data }) => {
     );
   };
   return (
-    <div style={{ position: 'relative', width: '220px', height: '220px', margin: '0 auto' }}>
-      <svg width="220" height="220" viewBox="0 0 220 220" style={{ transform: 'rotate(-90deg)' }}>
+    <div style={{ position: 'relative', width: '100%', maxWidth: '220px', height: '220px', margin: '0 auto' }}>
+      <svg width="100%" height="220" viewBox="0 0 220 220" style={{ transform: 'rotate(-90deg)' }}>
         <defs>
           {createGradient('gradient-organic', '#10b981')}
           {createGradient('gradient-recyclable', '#3b82f6')}
@@ -823,8 +920,8 @@ const ModernPieChart = ({ data }) => {
     };
   });
   return (
-    <div style={{ position: 'relative', width: '220px', height: '220px', margin: '0 auto' }}>
-      <svg width="220" height="220" viewBox="0 0 220 220">
+    <div style={{ position: 'relative', width: '100%', maxWidth: '220px', height: '220px', margin: '0 auto' }}>
+      <svg width="100%" height="220" viewBox="0 0 220 220">
         <defs>
           <filter id="shadow" x="-20%" y="-20%" width="140%" height="140%">
             <feDropShadow dx="0" dy="0" stdDeviation="3" floodColor="rgba(0,0,0,0.1)" />
@@ -1045,7 +1142,7 @@ const Dashboard = () => {
         <div className={classes.logoSection}>
           <div className={classes.logoIcon}>♻️</div>
           <div>
-            <h1 style={{ margin: 0, fontSize: '1.5rem', color: '#10b981' }}>Eco Impact Overview</h1>
+            <h1 style={{ margin: 0, fontSize: '1.5rem', color: '#10b981', '@media (max-width: 768px)': { fontSize: '1.25rem' } }}>Eco Impact Overview</h1>
            
           </div>
         </div>
@@ -1166,7 +1263,7 @@ const Dashboard = () => {
               data={chartData}
               colors={{ organic: '#10b981', recyclable: '#3b82f6', hazardous: '#ef4444' }}
             />
-            <div style={{ display: 'flex', justifyContent: 'center', gap: '1.5rem', marginTop: '1rem' }}>
+            <div style={{ display: 'flex', justifyContent: 'center', gap: '1.5rem', marginTop: '1rem', flexWrap: 'wrap' }}>
               <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
                 <div style={{ width: '12px', height: '12px', backgroundColor: '#10b981', borderRadius: '2px' }}></div>
                 <span style={{ fontSize: '0.85rem', color: '#374151' }}>Organic</span>
@@ -1182,7 +1279,7 @@ const Dashboard = () => {
             </div>
           </div>
           <div className={classes.chartCard}>
-            <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '1.5rem' }}>
+            <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '1.5rem', flexWrap: 'wrap', gap: '1rem' }}>
               <h3 className={classes.chartTitle}>🥧 Waste Composition</h3>
               <div style={{ display: 'flex', gap: '0.5rem' }}>
                 <button
